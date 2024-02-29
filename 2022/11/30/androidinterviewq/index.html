@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sheng Wang">
+
+
+
+
+
+<title>Android面试 | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/chicken.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">ChengCheng&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ChengCheng&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Android面试</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Sheng Wang</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">November 30, 2022&nbsp;&nbsp;13:17:00</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <ol>
+<li><strong>android 4大组件</strong><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/ican87/article/details/21874321">https://blog.csdn.net/ican87/article/details/21874321</a></li>
+<li><strong>activity生命周期</strong><br>Activity 类中定义了 7 个回调方法，覆盖了 Activity 生命周期的每一个环节，这 7 种方法除了 onRestart() 方法，其他都是两两相对的。<br>onCreate()：<br>当 Activity 第一次创建时会被调用，在此方法中应当完成初始化工作，比如加载布局、绑定事件等。<br>onRestart()：<br>表示 Activity 正在重新启动，一般情况下，当当前 Activity 从不可见重新变为可见状态时，onRestart 就会被调用。<br>onStart()：<br>表示 Activity 正在被启动，即将开始，这时 Activity 已经出现了，但是还没有出现在前台，无法与用户交互。<br>onResume()：<br>表示 Activity 已经可见了，并且出现在前台并开始活动。需要和 onStart() 对比，onStart() 的时候 Activity 还在后台，onResume() 的时候 Activity 才显示到前台。<br>onPause()：<br>表示 Activity 正在停止，仍可见，正常情况下，紧接着 onStop() 就会被调用；在特殊情况下，如果这个时候快速地回到当前 Activity，那么 onResume() 就会被调用（极端情况）；onPause() 执行一定要速度快，不然会影响到新的栈顶活动的使用，所以不能进行耗时操作。<br>onStop()：<br>表示 Activity 即将停止，不可见，位于后台。可以做稍微重量级的回收工作，同样不能太耗时。<br>onDestory()：<br>表示 Activity 即将销毁，这是 Activity 生命周期的最后一个回调，可以做一些回收工作和最终的资源回收，之后 Activity 的状态将变为销毁状态。</li>
+<li><strong>横竖屏切换（API13之后）</strong><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiewenhao12/article/details/79282590">https://blog.csdn.net/xiewenhao12/article/details/79282590</a><br>API13之前并不清楚，没有用过<br>我知道如何防止重新被加载<br>android:configChanges&#x3D;”screenSize|keyboardHidden|orientation”<br>下面是不同configChanges的生命周期的变化<br>1、不设置Activity的android:configChanges，或设置Activity的android:configChanges&#x3D;”orientation”，或设置Activity的android:configChanges&#x3D;”orientation|keyboardHidden”，切屏会重新调用各个生命周期，切横屏时会执行一次，切竖屏时会执行一次。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">11</span>-<span class="number">02</span> <span class="number">20</span>:<span class="number">19</span>:<span class="number">00.268</span> <span class="number">13324</span>-<span class="number">13324</span>/com.ys.yoosir.screenconfigchange D/MainActivity:  -- onPause</span><br><span class="line"><span class="number">11</span>-<span class="number">02</span> <span class="number">20</span>:<span class="number">19</span>:<span class="number">00.268</span> <span class="number">13324</span>-<span class="number">13324</span>/com.ys.yoosir.screenconfigchange D/MainActivity:  -- onSaveInstanceState</span><br><span class="line"><span class="number">11</span>-<span class="number">02</span> <span class="number">20</span>:<span class="number">19</span>:<span class="number">00.268</span> <span class="number">13324</span>-<span class="number">13324</span>/com.ys.yoosir.screenconfigchange D/MainActivity:  -- onStop</span><br><span class="line"><span class="number">11</span>-<span class="number">02</span> <span class="number">20</span>:<span class="number">19</span>:<span class="number">00.268</span> <span class="number">13324</span>-<span class="number">13324</span>/com.ys.yoosir.screenconfigchange D/MainActivity:  -- onDestroy</span><br><span class="line"><span class="number">11</span>-<span class="number">02</span> <span class="number">20</span>:<span class="number">19</span>:<span class="number">00.318</span> <span class="number">13324</span>-<span class="number">13324</span>/com.ys.yoosir.screenconfigchange D/MainActivity:  -- onCreate - orientation</span><br><span class="line"><span class="number">11</span>-<span class="number">02</span> <span class="number">20</span>:<span class="number">19</span>:<span class="number">00.338</span> <span class="number">13324</span>-<span class="number">13324</span>/com.ys.yoosir.screenconfigchange D/MainActivity:  -- onStart</span><br><span class="line"><span class="number">11</span>-<span class="number">02</span> <span class="number">20</span>:<span class="number">19</span>:<span class="number">00.338</span> <span class="number">13324</span>-<span class="number">13324</span>/com.ys.yoosir.screenconfigchange D/MainActivity:  -- onRestoreInstanceState</span><br><span class="line"><span class="number">11</span>-<span class="number">02</span> <span class="number">20</span>:<span class="number">19</span>:<span class="number">00.338</span> <span class="number">13324</span>-<span class="number">13324</span>/com.ys.yoosir.screenconfigchange D/MainActivity:  -- onResume</span><br></pre></td></tr></table></figure>
+2、配置 android:configChanges&#x3D;”orientation|keyboardHidden|screenSize”，才不会销毁 activity，且只调用 onConfigurationChanged方法。</li>
+<li><strong>Android View绘制流程</strong><br><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1745688">https://cloud.tencent.com/developer/article/1745688</a><br>measure测量：为测量宽高过程，如果是ViewGroup还要在onMeasure中对所有子View进行measure操作。<br>layout布局：用于摆放View在ViewGroup中的位置，如果是ViewGroup要在onLayout方法中对所有子View进行layout操作。<br>draw绘制：往View上绘制图像。<br><em>一共有三种测量模式：</em><br>UNSPECIFIED ：父布局不会对子View做任何限制，例如我们常用的ScrollView就是这种测量模式。<br>EXACTLY ：精确数值，比如使用了match_parent或者xxxdp，表示父布局已经决定了子View的大小，通常在这种情况下View的尺寸就是SpacSize<br>AT_MOST ：自适应，对应wrap_conte nt子View可以根据内容设置自己的大小，但前提是不能超出父ViewGroup的宽高。</li>
+<li><strong>OOM(System.gc)</strong><br>4.1 java.lang.OutOfMemoryError: Java heap space ——&gt;java堆内存溢出，此种情况最常见，一般由于内存泄露或者堆的大小设置不当引起。对于内存泄露，需要通过内存监控软件查找程序中的泄露代码，而堆大小可以通过虚拟机参数-Xms,-Xmx等修改。<br>4.2 java.lang.OutOfMemoryError: PermGen space ——&gt;java永久代溢出，即方法区溢出了，一般出现于大量Class或者jsp页面，或者采用cglib等反射机制的情况，因为上述情况会产生大量的Class信息存储于方法区。此种情况可以通过更改方法区的大小来解决，使用类似-XX:PermSize&#x3D;64m -XX:MaxPermSize&#x3D;256m的形式修改。另外，过多的常量尤其是字符串也会导致方法区溢出。<br>4.3 java.lang.StackOverflowError ——&gt; 不会抛OOM error，但也是比较常见的Java内存溢出。JAVA虚拟机栈溢出，一般是由于程序中存在死循环或者深度递归调用造成的，栈大小设置太小也会出现此种溢出。可以通过虚拟机参数-Xss来设置栈的大小。<br>4.4 遇到的问题和解决办法：<br>图片处理；<br>编码方式；<br>调整图片大小。<br>可以在manifest里面加入这个缓解一下：android:largeHeap&#x3D;“true”  512, 我忘记常规的heap了，好像是192.<br>治标不治本，一旦出现oom，即使使用了largeheap发现不再出现oom，也不代表你的应用就万事大吉了，可能只是在这个测试用例里面能够成功运行。但是一旦再出现更大的情况，还是会出现OOM。<br>我也尝试过catch过OOM，但是我时候也想了一下，catch又有什么用呢？报错都已经报错了。也就是说在我这个应用里面，这种大图片就是处理不了。catch只是抓住了这个oom，但我并没有实际办法可以解决这个OOM.</li>
+<li><strong>java 堆（heap先进先出）和栈(stack先进后出)</strong><br><strong>堆内存</strong>：new一个对象或者创建一个数组<br>堆heap内存占据了虚拟机的大部分内存空间，程序执行时产生的对象就分配在堆heap内存上。<br>如果是堆heap内存没有可用的空间存储生成的对象，JVM会抛出java.lang.OutOfMemoryError。<br><strong>栈内存</strong>：基本类型的变量和对象的引用变量<br>栈stack是存储方法调用的一片内存数据区。</li>
+<li><strong>ANR Application Not Responding；也就是应用程序无响应</strong><br><em>InputDispatching Timeout</em>：5秒内无法响应屏幕触摸事件或键盘输入事件<br><em>BroadcastQueue Timeout</em> ：在执行前台广播（BroadcastReceiver）的onReceive()函数时10秒没有处理完成，后台为60秒。<br><em>Service Timeout</em> ：前台服务20秒内，后台服务在200秒内没有执行完毕。<br><em>ContentProvider Timeout</em> ：ContentProvider的publish在10s内没进行完。<br><em>解决办法</em>：<br>尽量避免在主线程（UI线程）中作耗时操作。耗时的操作放在子线程。<br>避免死锁的出现<br>文件读写或数据库操作放在子线程异步操作。</li>
+<li><strong>http协议</strong><br>get &#x2F; post &#x2F; put &#x2F; delete</li>
+<li><strong>网络协议</strong><br> <em>1.application layer</em><br>http https<br> <em>2.transport layer</em><br>TCP UDP<br> <em>3.network layer</em><br>路由选择，堵塞控制<br> <em>4.link layer</em><br>封装<br> <em>5.physic layer</em></li>
+<li><strong>Android申请权限</strong><br>manifest里面加安全的权限<br>不安全的权限看看有没有，没有问user要</li>
+<li><strong>Activity 异常情况下的生命周期</strong><br>1.系统配置数据改变导致 Activity 销毁并重创：例如横竖屏的切换时<br>2.资源内存不足，导致 优先级低的 Activity 被杀.但是Task 和 Activity 栈以及相应的 Intent 和数据会被系统保存起来，在应用程序被切回前台时，均会被恢复。</li>
+<li><strong>新的 Activity 执行完后需要返回到启动它的 Activity 来执行的回调函数</strong><br>startActivityResult()</li>
+<li><strong>Android 常用控件</strong><br>TextView、按钮 Button、内容编辑 EditText、ImageView、进度条 ProgressBar、警告框 AlertDialog、进度提示框 ProgressDialog 等等</li>
+<li><strong>Android布局和布局优化</strong><br>UI 卡顿产生原因：<br>在 UI 线程中做了轻微的耗时操作；<br>布局 Layout 过于复杂，无法在 16ms 内完成渲染；<br>同一时间执行动画次数过多，导致 CPU 与 GPU 负载过重；<br>View 频繁触发 Measure 与 Layout；<br>频繁触发 GC 操作，导致线程暂停。<br>UI 卡顿的优化策略：<br>布局 Layout 优化；<br>RecyclerView 优化；<br>图片优化；<br>避免 ANR。</li>
+<li><strong>RecyclerView和ListView的区别</strong><br>ListView 的布局比较单一，只有一个纵向效果；<br>RecyclerView 的布局效果丰富<br>RecyclerView中可以实现局部刷新</li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Sheng Wang</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2022/11/30/androidinterviewq/">http://example.com/2022/11/30/androidinterviewq/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/12/02/javainterviewq/">java面试八股文🤮</a>
+            
+            
+            <a class="next" rel="next" href="/2022/11/30/javathread/">Java并发</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Sheng Wang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

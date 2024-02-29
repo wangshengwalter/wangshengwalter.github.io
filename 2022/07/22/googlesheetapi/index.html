@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sheng Wang">
+
+
+
+
+
+<title>JAVA使用Google sheet 的API服务 | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/chicken.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">ChengCheng&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ChengCheng&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">JAVA使用Google sheet 的API服务</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Sheng Wang</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">July 22, 2022&nbsp;&nbsp;18:46:00</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="JAVA使用Google-sheet-的API服务"><a href="#JAVA使用Google-sheet-的API服务" class="headerlink" title="JAVA使用Google sheet 的API服务"></a>JAVA使用Google sheet 的API服务</h2><p>和使用google drive API的方式差不多，直接上代码 <a target="_blank" rel="noopener" href="https://developers.google.com/sheets/api/quickstart/java">(英文指导Google sheet Java Quickstart)</a></p>
+<ul>
+<li>先去注册软件生成credentials.json</li>
+<li>改build.gradle文件<br>这上面两步可以去看Google drive 的API如何使用的，是一样的。json文件是可以重复使用的。<a target="_blank" rel="noopener" href="https://shengwang.fun/index.php/Java/23.html">(drive指导Google drive Java Quickstart)</a></li>
+<li>第一个function是生成service</li>
+<li>第二个function是读取sheet的数据</li>
+<li>第三个function是改变sheet的数据</li>
+</ul>
+<span id="more"></span>
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.google.api.client.auth.oauth2.Credential;</span><br><span class="line"><span class="keyword">import</span> com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;</span><br><span class="line"><span class="keyword">import</span> com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;</span><br><span class="line"><span class="keyword">import</span> com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;</span><br><span class="line"><span class="keyword">import</span> com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeTokenRequest;</span><br><span class="line"><span class="keyword">import</span> com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;</span><br><span class="line"><span class="keyword">import</span> com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;</span><br><span class="line"><span class="keyword">import</span> com.google.api.client.googleapis.json.GoogleJsonError;</span><br><span class="line"><span class="keyword">import</span> com.google.api.client.googleapis.json.GoogleJsonResponseException;</span><br><span class="line"><span class="keyword">import</span> com.google.api.client.http.HttpRequestInitializer;</span><br><span class="line"><span class="keyword">import</span> com.google.api.client.http.javanet.NetHttpTransport;</span><br><span class="line"><span class="keyword">import</span> com.google.api.client.json.JsonFactory;</span><br><span class="line"><span class="keyword">import</span> com.google.api.client.json.gson.GsonFactory;</span><br><span class="line"><span class="keyword">import</span> com.google.api.client.util.store.FileDataStoreFactory;</span><br><span class="line"><span class="keyword">import</span> com.google.api.services.drive.DriveScopes;</span><br><span class="line"><span class="keyword">import</span> com.google.api.services.sheets.v4.Sheets;</span><br><span class="line"><span class="keyword">import</span> com.google.api.services.sheets.v4.SheetsScopes;</span><br><span class="line"><span class="keyword">import</span> com.google.api.services.sheets.v4.model.GridRange;</span><br><span class="line"><span class="keyword">import</span> com.google.api.services.sheets.v4.model.UpdateValuesResponse;</span><br><span class="line"><span class="keyword">import</span> com.google.api.services.sheets.v4.model.ValueRange;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.FileNotFoundException;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.security.GeneralSecurityException;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Collections;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SheetsQuickstart</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">APPLICATION_NAME</span> <span class="operator">=</span> <span class="string">&quot;Google Sheets API Java Quickstart&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">JsonFactory</span> <span class="variable">JSON_FACTORY</span> <span class="operator">=</span> GsonFactory.getDefaultInstance();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">TOKENS_DIRECTORY_PATH</span> <span class="operator">=</span> <span class="string">&quot;sheettokens&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Global instance of the scopes required by this quickstart.</span></span><br><span class="line"><span class="comment">     * If modifying these scopes, delete your previously saved tokens/ folder.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> List&lt;String&gt; SCOPES = Collections.singletonList(SheetsScopes.SPREADSHEETS);</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">CREDENTIALS_FILE_PATH</span> <span class="operator">=</span> <span class="string">&quot;/credentials.json&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Credential</span> <span class="variable">this_token</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Sheets</span> <span class="variable">service</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * init the sheet.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException If the credentials.json file cannot be found.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SheetsQuickstart</span><span class="params">()</span> <span class="keyword">throws</span> IOException, GeneralSecurityException &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">final</span> <span class="type">NetHttpTransport</span> <span class="variable">HTTP_TRANSPORT</span> <span class="operator">=</span> GoogleNetHttpTransport.newTrustedTransport();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Load client secrets.</span></span><br><span class="line">        <span class="type">InputStream</span> <span class="variable">in</span> <span class="operator">=</span> SheetsQuickstart.class.getResourceAsStream(CREDENTIALS_FILE_PATH);</span><br><span class="line">        <span class="keyword">if</span> (in == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">FileNotFoundException</span>(<span class="string">&quot;Resource not found: &quot;</span> + CREDENTIALS_FILE_PATH);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">GoogleClientSecrets</span> <span class="variable">clientSecrets</span> <span class="operator">=</span> GoogleClientSecrets.load(JSON_FACTORY, <span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(in));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Build flow and trigger user authorization request.</span></span><br><span class="line">        <span class="type">GoogleAuthorizationCodeFlow</span> <span class="variable">flow</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">GoogleAuthorizationCodeFlow</span>.Builder(</span><br><span class="line">                HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)</span><br><span class="line">                .setDataStoreFactory(<span class="keyword">new</span> <span class="title class_">FileDataStoreFactory</span>(<span class="keyword">new</span> <span class="title class_">java</span>.io.File(TOKENS_DIRECTORY_PATH)))</span><br><span class="line">                .setAccessType(<span class="string">&quot;offline&quot;</span>)</span><br><span class="line">                .build();</span><br><span class="line">        <span class="type">LocalServerReceiver</span> <span class="variable">receiver</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">LocalServerReceiver</span>.Builder().setPort(<span class="number">8888</span>).build();</span><br><span class="line"></span><br><span class="line">        this_token = <span class="keyword">new</span> <span class="title class_">AuthorizationCodeInstalledApp</span>(flow, receiver).authorize(<span class="string">&quot;user&quot;</span>);</span><br><span class="line"></span><br><span class="line">        service = <span class="keyword">new</span> <span class="title class_">Sheets</span>.Builder(HTTP_TRANSPORT, JSON_FACTORY, this_token)</span><br><span class="line">                .setApplicationName(APPLICATION_NAME)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Prints the names and majors of students in a sample spreadsheet:</span></span><br><span class="line"><span class="comment">     * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;String&gt; <span class="title function_">run</span><span class="params">(String file)</span> <span class="keyword">throws</span> IOException, GeneralSecurityException &#123;</span><br><span class="line">        <span class="comment">// Build a new authorized API client service.</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">final</span> <span class="type">String</span> <span class="variable">spreadsheetId</span> <span class="operator">=</span> file;</span><br><span class="line">        <span class="keyword">final</span> <span class="type">String</span> <span class="variable">range</span> <span class="operator">=</span> <span class="string">&quot;A2:C&quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">ValueRange</span> <span class="variable">response</span> <span class="operator">=</span> service.spreadsheets().values()</span><br><span class="line">                .get(spreadsheetId, range)</span><br><span class="line">                .execute();</span><br><span class="line">        List&lt;List&lt;Object&gt;&gt; values = response.getValues();</span><br><span class="line"></span><br><span class="line">        List&lt;String&gt; ans = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span> (values == <span class="literal">null</span> || values.isEmpty()) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;No data found.&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> (List row : values) &#123;</span><br><span class="line">                <span class="comment">// Print columns A and E, which correspond to indices 0 and 4.</span></span><br><span class="line">                <span class="comment">//System.out.printf(&quot;%s, %s\n&quot;, row.get(0), row.get(4));</span></span><br><span class="line">                ans.add(row.get(<span class="number">0</span>).toString());</span><br><span class="line">                <span class="comment">//System.out.printf(&quot;%s\n&quot;, row.get(0));</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> UpdateValuesResponse <span class="title function_">updateValues</span><span class="params">(String spreadsheetId,</span></span><br><span class="line"><span class="params">                                                    String range,</span></span><br><span class="line"><span class="params">                                                    String valueInputOption,</span></span><br><span class="line"><span class="params">                                                    List&lt;List&lt;Object&gt;&gt; values)</span></span><br><span class="line">            <span class="keyword">throws</span> IOException &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">UpdateValuesResponse</span> <span class="variable">result</span> <span class="operator">=</span><span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// Updates the values in the specified range.</span></span><br><span class="line">            <span class="type">ValueRange</span> <span class="variable">body</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ValueRange</span>()</span><br><span class="line">                    .setValues(values);</span><br><span class="line">            result = service.spreadsheets().values().update(spreadsheetId, range, body)</span><br><span class="line">                    .setValueInputOption(valueInputOption)</span><br><span class="line">                    .execute();</span><br><span class="line">            System.out.printf(<span class="string">&quot;%d cells updated.\n&quot;</span>, result.getUpdatedCells());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (GoogleJsonResponseException e) &#123;</span><br><span class="line">            <span class="comment">// TODO(developer) - handle error appropriately</span></span><br><span class="line">            <span class="type">GoogleJsonError</span> <span class="variable">error</span> <span class="operator">=</span> e.getDetails();</span><br><span class="line">            <span class="keyword">if</span> (error.getCode() == <span class="number">404</span>) &#123;</span><br><span class="line">                System.out.printf(<span class="string">&quot;Spreadsheet not found with id &#x27;%s&#x27;.\n&quot;</span>,spreadsheetId);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">throw</span> e;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Sheng Wang</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2022/07/22/googlesheetapi/">http://example.com/2022/07/22/googlesheetapi/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/07/22/similarbettwostring/">Java判断两个String的相似度</a>
+            
+            
+            <a class="next" rel="next" href="/2022/07/22/googledriveapi/">JAVA使用Google drive的API服务</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Sheng Wang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sheng Wang">
+
+
+
+
+
+<title>面试总结1 | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/chicken.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">ChengCheng&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ChengCheng&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">面试总结1</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Sheng Wang</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">December 6, 2022&nbsp;&nbsp;18:34:00</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <ol>
+<li><p><strong>集度：</strong><br>屁都不会<br>android组件化，<br>viewgroup</p>
+</li>
+<li><p><strong>堆糖：一面过，二面结束</strong><br>android studio有没有用过什么插件？<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/163002182#:~:text=%E7%83%AD%E9%97%A8Android%20Studio%20%E6%8F%92%E4%BB%B6%EF%BC%8C%E8%BF%99%E9%87%8C%E6%98%AFTop%2020%EF%BC%81%201%201.%20CodeGlance%20%E4%B8%8ESublime%E6%88%96Xcode%E7%9B%B8%E4%BC%BC%EF%BC%8C%E6%AD%A4%E6%8F%92%E4%BB%B6%E5%9C%A8%E4%BD%A0%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%AD%E5%B5%8C%E5%85%A5%E4%BA%86%E4%BB%A3%E7%A0%81%E7%9A%84,...%208%208.%20Vector%20Drawable%20Thumbnails%20...%20%E6%9B%B4%E5%A4%9A%E9%A1%B9%E7%9B%AE">https://zhuanlan.zhihu.com/p/163002182#:~:text=%E7%83%AD%E9%97%A8Android%20Studio%20%E6%8F%92%E4%BB%B6%EF%BC%8C%E8%BF%99%E9%87%8C%E6%98%AFTop%2020%EF%BC%81%201%201.%20CodeGlance%20%E4%B8%8ESublime%E6%88%96Xcode%E7%9B%B8%E4%BC%BC%EF%BC%8C%E6%AD%A4%E6%8F%92%E4%BB%B6%E5%9C%A8%E4%BD%A0%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%AD%E5%B5%8C%E5%85%A5%E4%BA%86%E4%BB%A3%E7%A0%81%E7%9A%84,...%208%208.%20Vector%20Drawable%20Thumbnails%20...%20%E6%9B%B4%E5%A4%9A%E9%A1%B9%E7%9B%AE</a><br>CodeGlance（缩略代码显示）<br>Codota（代码补全）<br>需要了解android studio的快捷键？<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/28859644#:~:text=Android%20Studio%20%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%201%201.%20Ctrl%2BG%20%E5%90%8C%E6%97%B6%E6%8C%89%E4%B8%8BCtrl%2BG%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%BC%B9%E5%87%BA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E6%A1%86%EF%BC%8C%E5%9C%A8%E6%A1%86%E4%B8%AD%E8%BE%93%E5%85%A5%E8%A1%8C%E6%95%B0%E7%82%B9%E5%87%BBOK%E5%8D%B3%E5%8F%AF%E5%BF%AB%E9%80%9F%E5%88%87%E6%8D%A2%E5%88%B0%E5%AF%B9%E5%BA%94%E7%9A%84%E8%A1%8C%E6%95%B0%EF%BC%8C%E5%A6%82%E5%9B%BE2.17%E6%89%80%E7%A4%BA%E3%80%82%20%E5%9B%BE2.17,...%206%206.%20Ctrl%2BJ%20...%207%207.%20Ctrl%2BF12%EF%BC%9A">https://zhuanlan.zhihu.com/p/28859644#:~:text=Android%20Studio%20%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%201%201.%20Ctrl%2BG%20%E5%90%8C%E6%97%B6%E6%8C%89%E4%B8%8BCtrl%2BG%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%BC%B9%E5%87%BA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E6%A1%86%EF%BC%8C%E5%9C%A8%E6%A1%86%E4%B8%AD%E8%BE%93%E5%85%A5%E8%A1%8C%E6%95%B0%E7%82%B9%E5%87%BBOK%E5%8D%B3%E5%8F%AF%E5%BF%AB%E9%80%9F%E5%88%87%E6%8D%A2%E5%88%B0%E5%AF%B9%E5%BA%94%E7%9A%84%E8%A1%8C%E6%95%B0%EF%BC%8C%E5%A6%82%E5%9B%BE2.17%E6%89%80%E7%A4%BA%E3%80%82%20%E5%9B%BE2.17,...%206%206.%20Ctrl%2BJ%20...%207%207.%20Ctrl%2BF12%EF%BC%9A</a><br>android studio的性能监测？<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_28831197/article/details/80080228">https://blog.csdn.net/qq_28831197/article/details/80080228</a><br>（可以使用android profile:内存；cpu使用率；网络分析）<br>响应速度？<br>git我会用<br>说一下注册用户的过程？<br>如何判断用户的昵称是否合法？（是否带数字？如何检查;java正则表达式？如何给后端传送昵称判断？如何防止用户一直发送判断昵称是否合法（post, pull, get）？不能使用验证码。最好是限制时间，比如说每60秒一次。）</p>
+</li>
+<li><p><strong>传墨：我觉得答的很好，但是没过</strong></p>
+</li>
+<li><p><strong>乔戈里科技：需要的是flutter:要同时开发android和ios</strong><br>android和java的回调机制？<br>设计模式？瀑布式什么的？</p>
+</li>
+<li></li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Sheng Wang</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2022/12/06/interviewsum/">http://example.com/2022/12/06/interviewsum/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/12/28/rosinstall/">如何安装Ubuntu 20.04; QT & ROS</a>
+            
+            
+            <a class="next" rel="next" href="/2022/12/02/javainterviewq/">java面试八股文🤮</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Sheng Wang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
