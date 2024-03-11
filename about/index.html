@@ -17,7 +17,7 @@
 
 
 
-    <link rel="icon" href="/image/chicken.ico">
+    <link rel="icon" href="/image/flask1.ico">
 
 
 
@@ -76,8 +76,6 @@
                 
                     <a class="menu-item" href="/category">Categories</a>
                 
-                    <a class="menu-item" href="/tag">Tags</a>
-                
                     <a class="menu-item" href="/about">About</a>
                 
                 <input id="switch_default" type="checkbox" class="switch_default">
@@ -101,8 +99,6 @@
                 
                     <a class="menu-item" href="/category">Categories</a>
                 
-                    <a class="menu-item" href="/tag">Tags</a>
-                
                     <a class="menu-item" href="/about">About</a>
                 
             </div>
@@ -123,20 +119,320 @@
         }
     }
 </script>
-            <div class="main">
-                <div class="container">
-    <article class="post-wrap page">
-        
-        <h2 class="post-title">about</h2>
-        
-        <section class="post-content">
-            
-        </section>
-    </article>
+
+
+
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js"></script>
+
+<div class="parallax" id="parallax">
+    
+    <img src="/image/about_starnight.png" id="starnight">
+    <img src="/image/about_hill.png" id="hill">
+    <img src="/image/about_town2.png" id="town2">
+    <img src="/image/about_town1.png" id="town1">
+    <img src="/image/about_tree.png" id="tree">
+    <h1 id="about_title">Sheng Wang</h1>
 </div>
 
-            </div>
-            <footer id="footer" class="footer">
+<div class="skill_board" id="skill_board">
+    <h1>TECHNICAL SKILLS</h1>
+    <img class="title_divi" src="/image/lrise.png">
+    <h2>Computer Language:</h2>
+    <h3>C/C++, Java, Python, SQL, Shell</h3>
+    <h2>Developing Software:</h2>
+    <h3>Android studio, QT, Visual Studio, IntelliJ IDEA</h3>
+    <h2>Platform experience:</h2>
+    <h3>ROS, Ubuntu/Linux, AWS, Google Development kits, Git, Chat-GPT</h3>
+</div>
+
+<div class="about-container"> 
+    <div class="exp_title">
+        <h1>Working Experience</h1>
+        <img class="title_divi" src="/image/lrise.png">
+    </div>
+
+
+    <div id="map"></div>
+    <div id="features">
+        <section id="bachelor" class="active">
+            <h3>University of British Columbia</h3>
+            <h4>Sep,2018 ~ May,2022</h4>
+            <p>
+                Bachelor of Applied Science - Computer Engineering
+            </p>
+        </section>
+        <section id="CPEN391">
+            <h3>Ingredient decoder design(C++, Python, Java)</h3>
+            <h4>Jan,2021 ~ Apr,2021</h4>
+            <p>
+                ●A team with 5 people, designed an app to identify ingredient tables and check sensitization.<br />
+                ●Responsible for using Android studio to create the front-end of the design.<br />
+                ●Responsible for connecting the the development board with Wi-Fi broadband<br />
+                ●Responsible for connecting the app with the development board by using a Bluetooth chip.<br />
+                ●Responsible for connecting the raspberry pi with the De1-Soc board through RS232.<br />
+                ●Assisted in creating the back-end by using node.js.<br />
+                ●Assisted in creating the identify module by using raspberry pi and camera
+            </p>
+        </section>
+        <section id="CPEN431">
+            <h3>Android app design(Java)</h3>
+            <h4>Sep,2021 ~ Dec,2021</h4>
+            <p>
+                ●A team with 4 people, designed an app to post and rent unused UBC residences.<br />
+                ●Responsible for using Android studio to create the front-end of the application.<br />
+                ●Responsible for making unit tests to test front-end UI.<br />
+                ●Responsible for making connections between back-end and front-end.<br />
+                ●Assisted in creating the back-end by using node.js.
+            </p>
+        </section>
+        <section id="CPEN491">
+            <h3>Room-Based Procedural Game Level Generator design(C++)</h3>
+            <h4>Sep,2021 ~ May,2022</h4>
+            <p>
+                ●A team with 5 people, designed a windows app to generate indoor room game maps.<br />
+                ●Responsible for using Qt to generate game maps through additive algorithms.<br />
+                ●Responsible for creating timetable, github repository, google drive and slack to organize the project.<br />
+                ●Responsible for using Qt to generate 3-D thumbnails of game maps.<br />
+                ●Responsible for using Qt to encode the game map to a .csv file.<br />
+                ●Assisted in using Unreal engine 4 to render the game map by using .csv files.<br />
+                ●Assisted in using Qt to generate game maps through subtractive algorithms.<br />
+                ●Assisted in writing a project report (design document) to the client.<br />
+            </p>
+        </section>
+        <section id="self">
+            <h3>Image Editor Application(Java)</h3>
+            <h4>Jun,2022 ~ Jul,2022</h4>
+            <p>
+                ●An Android application for pixel art creators, which can pixelate pictures from the album into pixel art.<br />
+                ●Ability to resize the pixel grid, and compress pictures according to user needs.<br />
+                ●Solved the loading problem of large images.<br />
+                ●Provides a color merging method to make the picture more like pixel art.<br />
+            </p>
+        </section>
+        <section id="PrevWork">
+            <h3>C++ Software Developer(C++)</h3>
+            <h4>Jun,2022 ~ Jul,2022</h4>
+            <p>
+                ●Developed a Qt APP to control the harvest robot, including designing its user interface and
+                implementing hardware status display.<br />
+                ●Designed a basic database system for storing harvest data and progress information in the robot's
+                user interface.<br />
+                ●Created a comprehensive logic framework for generating and executing tasks for the robot.<br />
+                ●Designed a middleware solution to establish a connection between the user interface and the
+                hardware components through ROS2 protocol.<br />
+                ●Wrote numerous scripts in Ubuntu to expedite the testing and debugging process for other
+                developers.
+            </p>
+        </section>
+        <section id="Master">
+            <h3>University of Southern California - Los Angeles</h3>
+            <h4>Aug,2023 ~ May,2025</h4>
+            <p>
+                Master of Applied Science - Computer Engineering
+            </p>
+        </section>
+        <section id="self_blog">
+            <h3>Hexo theme Design(html, JS, NodeJS, CSS)</h3>
+            <h4>Mar,2024 ~ Cur</h4>
+            <p>
+                ●Design and implemente the Hexo theme for my personal blog.
+            </p>
+        </section>
+    </div>
+</div>
+
+<div class="contactinfo">
+    <h1>Contact Information</h1>
+    <img class="title_divi" src="/image/lrise.png">
+    <h2>Email: wangshengwalter@gmail.com</h2>
+</div>
+
+
+<script>
+    
+    let about_title = document.getElementById("about_title");
+    let town2 = document.getElementById("town2");
+    let town1 = document.getElementById("town1");
+    let tree = document.getElementById("tree");
+    let hill = document.getElementById("hill");
+    let starnight = document.getElementById("starnight");
+
+    window.addEventListener('scroll', () => {
+        let value = window.scrollY;
+        about_title.style.marginTop = value * 1 + 'px';
+        town1.style.marginTop = -value * 0.2 + 'px';
+        town2.style.marginTop = value * 0.1 + 'px';
+        hill.style.marginTop = value * 0.2 + 'px';
+        tree.style.marginTop = -value * 0.8 + 'px';
+        starnight.style.marginTop = value * 0.3 + 'px';
+    });
+    var origin_parallax_width = 1505;
+    function parallel_height_adjust(){
+        var parallax = document.getElementById('parallax');
+        parallax_width = parallax.clientWidth;
+        parallax.style.height = (parallax_width/origin_parallax_width)*700+'px'
+    }
+
+    window.onload = parallel_height_adjust;
+    window.onresize = parallel_height_adjust;
+
+
+	mapboxgl.accessToken = 'pk.eyJ1Ijoic2hlbmdpc2tpbmciLCJhIjoiY2p6OWUydnVzMHJsazNjcnMwM2dyN212aCJ9.fEIN6gaNucoBxY7xcCb_cg';
+    const map = new mapboxgl.Map({
+        container: 'map',
+        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+        style: 'mapbox://styles/mapbox/streets-v12',
+        center: [-123.246282, 49.260480],
+        zoom: 14,
+        bearing: 0,
+        pitch: 20
+    });
+
+    const chapters = {
+        'bachelor': {
+            bearing: 0,
+            center: [-123.246282, 49.260480],
+            zoom: 14,
+            pitch: 30
+        },
+        'CPEN391': {
+            duration: 6000,
+            bearing: 0,
+            center: [-123.246282, 49.260480],
+            zoom: 14,
+            pitch: 10
+        },
+        'CPEN431': {
+            speed: 0.6,
+            bearing: 0,
+            center: [-123.246282, 49.260480],
+            zoom: 14,
+            pitch: 20
+        },
+        'CPEN491': {
+            bearing: 0,
+            center: [-123.246282, 49.260480],
+            zoom: 14,
+            pitch: 30
+        },
+        'self': {
+            speed: 0.5,
+            bearing: 0,
+            center: [-123.184394, 49.256179],
+            zoom: 14,
+            pitch: 20
+        },
+        'PrevWork': {
+            speed: 0.5,
+            bearing: 0,
+            center: [120.156403, 30.161824],
+            zoom: 10,
+            pitch: 20
+        },
+        'Master': {
+            bearing: 180,
+            center: [-118.285043, 34.022227],
+            zoom: 15
+        },
+        'self_blog': {
+            bearing: 90,
+            center: [-118.285043, 34.022227],
+            zoom: 10,
+            pitch: 40
+        }
+    };
+
+    let activeChapterName = 'bachelor';
+    function setActiveChapter(chapterName) {
+        if (chapterName === activeChapterName) return;
+
+        map.flyTo(chapters[chapterName]);
+
+        document.getElementById(chapterName).classList.add('active');
+        document.getElementById(activeChapterName).classList.remove('active');
+
+        activeChapterName = chapterName;
+    }
+
+    function isElementOnScreen(id) {
+        const element = document.getElementById(id);
+        const bounding = element.getBoundingClientRect();
+        const scrollview = document.getElementById('features')
+        const scrollbonding = scrollview.getBoundingClientRect();
+        const totalcontentheight = scrollview.scrollHeight;
+
+        return bounding.top >scrollbonding.top;
+    }
+    function firstelementOnScreen(id){
+        const element = document.getElementById(id);
+        const bounding = element.getBoundingClientRect();
+        const scrollview = document.getElementById('features')
+        const scrollbonding = scrollview.getBoundingClientRect();
+        const totalcontentheight = scrollview.scrollHeight;
+        return (
+            bounding.top == scrollbonding.top
+        );
+    }
+
+    function reachbottom(){
+        const scrollview = document.getElementById('features')
+        const scrolledLength = scrollview.scrollTop;
+        const scrollbonding = scrollview.getBoundingClientRect();
+        const boundingheight = scrollbonding.height;
+        const totalcontentheight = scrollview.scrollHeight;
+        return (
+            scrolledLength+boundingheight + 5 >= totalcontentheight
+        );
+    }
+
+    // On every scroll event, check which element is on screen
+    features.onscroll = () => {
+
+        var scrollview = Object.keys(chapters)
+        var scrollview_size = scrollview.length;
+
+        if(firstelementOnScreen(scrollview[0])){
+            setActiveChapter(scrollview[0]);
+            return;
+        }
+
+        if(reachbottom()){
+           setActiveChapter(scrollview[scrollview_size-1]);
+           return;
+        }
+
+        for(var i = 1; i < scrollview_size-1; i++){
+            if(isElementOnScreen(scrollview[i])){
+                setActiveChapter(scrollview[i]);
+                break;
+            }
+        }
+        
+    };
+
+    // (() => {
+    //     const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+    //     const isDark = currentTheme === 'dark';
+    //     if (isDark) {
+    //         // map.setStyle('mapbox://styles/mapbox/dark-v10');
+    //         console.log("dark")
+    //     } else {
+    //         // map.setStyle('mapbox://styles/mapbox/light-v10');
+    //         console.log("light")
+    //     }
+    // })();
+    
+
+
+
+</script>
+
+
+
+
+<footer id="footer" class="footer">
     <div class="copyright">
         <span>© Sheng Wang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
     </div>

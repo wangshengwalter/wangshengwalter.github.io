@@ -17,7 +17,7 @@
 
 
 
-    <link rel="icon" href="/image/chicken.ico">
+    <link rel="icon" href="/image/flask1.ico">
 
 
 
@@ -66,7 +66,8 @@
     </script>
 
     <div class="wrapper">
-        <header>
+        
+<header>
     <nav class="navbar">
         <div class="container">
             <div class="navbar-header header-logo"><a href="/">ChengCheng&#39;s Blog</a></div>
@@ -76,8 +77,6 @@
                 
                     <a class="menu-item" href="/category">Categories</a>
                 
-                    <a class="menu-item" href="/tag">Tags</a>
-                
                     <a class="menu-item" href="/about">About</a>
                 
                 <input id="switch_default" type="checkbox" class="switch_default">
@@ -85,6 +84,15 @@
             </div>
         </div>
     </nav>
+    <!-- url("https://unsplash.it/1228/880?image=302") -->
+    <!-- style="background-image: url(/image/backimg.jpg)" -->
+
+
+    
+
+    
+
+
 
     
     <nav class="navbar-mobile" id="nav-mobile">
@@ -100,8 +108,6 @@
                     <a class="menu-item" href="/archives">Posts</a>
                 
                     <a class="menu-item" href="/category">Categories</a>
-                
-                    <a class="menu-item" href="/tag">Tags</a>
                 
                     <a class="menu-item" href="/about">About</a>
                 
@@ -122,16 +128,34 @@
             mobileMenu.classList.add("active")
         }
     }
-</script>
-            <div class="main">
-                <div class="container">
+
+    var posttitle_exist = function(){
+        var titletext = document.getElementById("text");
+        if(titletext == null) return;
+        
+        var textWidth = titletext.getComputedTextLength();
+        console.log(textWidth);
+        var pageWidth = window.innerWidth;
+        console.log(pageWidth);
+        if(textWidth > pageWidth){
+            document.getElementById("eff").style.display = "none";
+        }
+        else{
+            document.getElementById("eff").style.display = "block";
+        }
+    }
     
+    window.onload = posttitle_exist;
+    window.onresize = posttitle_exist;
+</script>
+
+<div class="container">
     
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Java并发</h1>
+            <h1 class="post-title" itemprop="name headline">Java并发</h1>
             
                 <div class="post-meta">
                     
@@ -260,12 +284,12 @@
     </article>
 </div>
 
-            </div>
-            <footer id="footer" class="footer">
+<footer id="footer" class="footer">
     <div class="copyright">
         <span>© Sheng Wang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
     </div>
 </footer>
+
 
     </div>
 </body>

@@ -5,3 +5,54 @@
   font-weight: 300;
   font-display: swap;
 }
+.textreflect {
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 0.7em;
+  outline: none;
+  color: #fff;
+  text-shadow: 0 0 10px #03bcf4, 0 0 30px #03bcf4, 0 0 50px #03bcf4, 0 0 1px #03bcf4;
+  box-reflect: below 4px linear-gradient(transparent, rgba(0,0,0,0.533));
+  -webkit-box-reflect: below 4px linear-gradient(transparent, rgba(0,0,0,0.533));
+}
+@-moz-keyframes reflect {
+  0%, 30%, 50%, 90%, 95% {
+    color: #fff;
+    text-shadow: 0 0 10px #03bcf4, 0 0 30px #03bcf4, 0 0 50px #03bcf4, 0 0 1px #03bcf4;
+  }
+  5%, 45%, 70%, 93%, 100% {
+    color: rgba(0,0,0,0);
+    text-shadow: none;
+  }
+}
+@-webkit-keyframes reflect {
+  0%, 30%, 50%, 90%, 95% {
+    color: #fff;
+    text-shadow: 0 0 10px #03bcf4, 0 0 30px #03bcf4, 0 0 50px #03bcf4, 0 0 1px #03bcf4;
+  }
+  5%, 45%, 70%, 93%, 100% {
+    color: rgba(0,0,0,0);
+    text-shadow: none;
+  }
+}
+@-o-keyframes reflect {
+  0%, 30%, 50%, 90%, 95% {
+    color: #fff;
+    text-shadow: 0 0 10px #03bcf4, 0 0 30px #03bcf4, 0 0 50px #03bcf4, 0 0 1px #03bcf4;
+  }
+  5%, 45%, 70%, 93%, 100% {
+    color: rgba(0,0,0,0);
+    text-shadow: none;
+  }
+}
+@keyframes reflect {
+  0%, 30%, 50%, 90%, 95% {
+    color: #fff;
+    text-shadow: 0 0 10px #03bcf4, 0 0 30px #03bcf4, 0 0 50px #03bcf4, 0 0 1px #03bcf4;
+  }
+  5%, 45%, 70%, 93%, 100% {
+    color: rgba(0,0,0,0);
+    text-shadow: none;
+  }
+}
