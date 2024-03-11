@@ -485,6 +485,9 @@ input[type="radio"]:not(:checked) + label:after {
 
 
 .navbar {
+  position: absolute;
+  top: 0;
+  z-index: 100;
   height: auto;
   line-height: 4rem;
   width: 100%;
@@ -492,6 +495,10 @@ input[type="radio"]:not(:checked) + label:after {
   flex-shrink: 0;
   flex-basis: auto;
   flex-direction: column;
+  background-color: #fff;
+}
+.dark-theme .navbar {
+  background-color: #292a2d;
 }
 .navbar .container {
   height: 4rem;
@@ -776,10 +783,123 @@ header label {
   margin: 0;
   padding-top: 0;
 }
+.parallax {
+  position: relative;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+  height: 700px;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+.parallax img {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: auto;
+  poinmter-events: none;
+}
+#starnight {
+  top: -50%;
+  z-index: 0;
+}
+#hill {
+  top: -50%;
+  z-index: 1;
+}
+#town2 {
+  top: -60%;
+  z-index: 3;
+}
+#town1 {
+  top: -50%;
+  z-index: 4;
+}
+#tree {
+  top: 10%;
+  z-index: 5;
+  color: rgba(255,255,255,0);
+  background-color: rgba(255,255,255,0);
+}
+#about_title {
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 4px 4px 6px #000;
+  font-size: 3em;
+  z-index: 2;
+}
+.title_divi {
+  height: 80px;
+  width: auto;
+}
+.skill_board {
+  height: auto;
+  padding: 50px;
+  z-index: 100;
+  object-position: center;
+  text-align: center;
+  background-color: #fff;
+}
+.dark-theme .skill_board {
+  background-color: #292a2d;
+}
+.about-container {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  z-index: 100;
+  background-color: #fff;
+}
+.dark-theme .about-container {
+  background-color: #292a2d;
+}
+.exp_title {
+  text-align: center;
+  object-position: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+#map {
+  position: absolute;
+  width: 50%;
+  height: 100vh;
+}
+#features {
+  width: 50%;
+  height: 100vh;
+  margin-left: 50%;
+  font-family: sans-serif;
+  overflow-y: scroll;
+}
+section {
+  padding: 25px 50px;
+  line-height: 25px;
+  border-bottom: 1px solid #ddd;
+  opacity: 0.25;
+  font-size: 13px;
+}
+section.active {
+  opacity: 1;
+}
+section:last-child {
+  border-bottom: none;
+  margin-bottom: 200px;
+}
+.contactinfo {
+  text-align: center;
+  object-position: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
 .container {
   height: 100%;
-  width: 100%;
   padding-top: 2rem;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
 }
 .post-wrap p {
   font-size: 1em;
