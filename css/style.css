@@ -485,8 +485,7 @@ input[type="radio"]:not(:checked) + label:after {
 
 
 .navbar {
-  position: absolute;
-  top: 0;
+  position: relative;
   z-index: 100;
   height: auto;
   line-height: 4rem;
@@ -875,17 +874,17 @@ header label {
   font-family: sans-serif;
   overflow-y: scroll;
 }
-section {
+#features section {
   padding: 25px 50px;
   line-height: 25px;
   border-bottom: 1px solid #ddd;
   opacity: 0.25;
   font-size: 13px;
 }
-section.active {
+#features section.active {
   opacity: 1;
 }
-section:last-child {
+#features section:last-child {
   border-bottom: none;
   margin-bottom: 200px;
 }
@@ -895,7 +894,7 @@ section:last-child {
   margin-top: 50px;
   margin-bottom: 50px;
 }
-.container {
+.post-content-container {
   height: 100%;
   padding-top: 2rem;
   padding-left: 0.8rem;
