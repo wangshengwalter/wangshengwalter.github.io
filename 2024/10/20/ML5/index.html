@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sheng Wang">
+
+
+
+
+
+<title>ML5 | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/flask1.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
+    
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        
+<header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">ChengCheng&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+    <!-- url("https://unsplash.it/1228/880?image=302") -->
+    <!-- style="background-image: url(/image/backimg.jpg)" -->
+
+
+    
+
+    
+
+
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ChengCheng&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+
+    var posttitle_exist = function(){
+        var titletext = document.getElementById("text");
+        if(titletext == null) return;
+        
+        var textWidth = titletext.getComputedTextLength();
+        console.log(textWidth);
+        var pageWidth = window.innerWidth;
+        console.log(pageWidth);
+        if(textWidth > pageWidth){
+            document.getElementById("eff").style.display = "none";
+        }
+        else{
+            document.getElementById("eff").style.display = "block";
+        }
+    }
+    
+    window.onload = posttitle_exist;
+    window.onresize = posttitle_exist;
+</script>
+
+<div class="container">
+    
+        <aside class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</aside>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title" itemprop="name headline">ML5</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Sheng Wang</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">October 20, 2024&nbsp;&nbsp;4:01:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/ML/">ML</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Sub-Gaussion-random-variable"><a href="#Sub-Gaussion-random-variable" class="headerlink" title="Sub-Gaussion random variable"></a>Sub-Gaussion random variable</h1><h2 id="Defi"><a href="#Defi" class="headerlink" title="Defi:"></a>Defi:</h2><p>A random variable $X$ is a $\sigma$-sub-Gaussion,<br>If $\lambda \in \mathbb{R}$.<br>$$<br>\mathbb{E}[exp(\lambda (X - \mathbb{E}(X)))] \leq exp(\frac{\lambda^2 \cdot \sigma^2}{2})<br>$$<br>$X$ is centered random variable<br>We need to know that, If $X\sim N(\mu, \sigma^2)$ (this a a Gaussion distribution), then<br>$$<br>\lambda \in \mathbb{R} \qquad \mathbb{E}[exp(\lambda(x-\mu))] &#x3D; exp(\frac{\lambda^2 \cdot \sigma^2}{2})<br>$$</p>
+<h2 id="sub-Gaussion-concentration-tail-bound-for-sub-Gaussian-random-variable"><a href="#sub-Gaussion-concentration-tail-bound-for-sub-Gaussian-random-variable" class="headerlink" title="sub-Gaussion concentration(tail bound for sub-Gaussian random variable)"></a>sub-Gaussion concentration(tail bound for sub-Gaussian random variable)</h2><p>Let $X$ be a sub Gaussion random variable. Then we should have:<br>$$<br>\forall t \gt 0, \qquad \mathbb{P}(X-\mathbb{E}(X) \geq t) \leq exp(\frac{-t^2}{2\sigma^2})<br>$$</p>
+<h3 id="Proofing"><a href="#Proofing" class="headerlink" title="Proofing:"></a>Proofing:</h3><p>Fix $\lambda \gt 0$<br>$$<br>\begin{aligned}<br>\mathbb{P}(X-\mathbb{E}(X) \geq t) &amp;\leq exp(-\lambda t) \cdot \mathbb{E}[exp(\lambda(X-\mathbb{E}[X]))] \qquad \text{laplace transform}\\<br>&amp;\leq exp(-\lambda t) \cdot exp(\frac{\lambda^2 \cdot \sigma^2}{2}) \qquad \text{sub gaussion}\\<br>&amp;\leq exp\{-\lambda t + \frac{\lambda^2 \cdot \sigma^2}{2}\}<br>\end{aligned}<br>$$<br>Now, we need to make $\lambda$ as small as possible.<br>So, let<br>$$<br>g(\lambda)&#x3D;-\lambda t + \frac{\lambda^2 \cdot \sigma^2}{2}<br>$$<br>Calculate the derivative of $g(\lambda)$<br>$$<br>\begin{aligned}<br>g’(\lambda) &#x3D; -t+\lambda \sigma^2 &amp;&#x3D; 0 \\<br>\lambda_* &amp;&#x3D;\frac{t}{\sigma^2}<br>\end{aligned}<br>$$<br>Then we can get $g(\lambda_*)$:<br>$$<br>g(\lambda_*)&#x3D;\frac{-t^2}{2\sigma^2}<br>$$<br>Finally, take into above equation:<br>$$<br>\begin{aligned}<br>\mathbb{P}(X-\mathbb{E}(X) \geq t) &amp;\leq exp\{-\lambda t + \frac{\lambda^2 \cdot \sigma^2}{2}\} \\<br>&amp;\leq exp\{g(\lambda_*)\}\\<br>&amp;\leq exp\{ \frac{-t^2}{2\sigma^2}\}<br>\end{aligned}<br>$$</p>
+<h2 id="Show-that-bdd-bounded-r-v-s-are-sub-Gaussion"><a href="#Show-that-bdd-bounded-r-v-s-are-sub-Gaussion" class="headerlink" title="Show that bdd(bounded) r.v.s are sub-Gaussion."></a>Show that bdd(bounded) r.v.s are sub-Gaussion.</h2><blockquote>
+<p>[&#x3D;&gt;Hoeffding Inequality</p>
+</blockquote>
+<h3 id="Rademacher-r-v-is-1-sub-Gaussion"><a href="#Rademacher-r-v-is-1-sub-Gaussion" class="headerlink" title="Rademacher r.v. is 1-sub-Gaussion."></a>Rademacher r.v. is 1-sub-Gaussion.</h3><blockquote>
+<p>Define Rademacher r.v. $\epsilon$ as:<br>$$<br>\mathbb{P}(\epsilon &#x3D; +1)&#x3D;\frac{1}{2}  \qquad \mathbb{P}(\epsilon &#x3D; -1)&#x3D;\frac{1}{2}<br>$$</p>
+</blockquote>
+<h3 id="Proofing-why-Rademacher-is-1-sub-Gaussion"><a href="#Proofing-why-Rademacher-is-1-sub-Gaussion" class="headerlink" title="Proofing why Rademacher is 1-sub-Gaussion:"></a>Proofing why Rademacher is 1-sub-Gaussion:</h3><p>Fix $\lambda \in \mathbb{R}$. We need to show:<br>$$<br>\mathbb{E}[exp(\lambda \epsilon)] \leq exp(\frac{\lambda^2}{2})<br>$$<br>Here is the process:<br>$$<br>\begin{aligned}<br>\mathbb{E}[exp(\lambda \epsilon)] &amp;&#x3D; exp(\lambda)\frac{1}{2}+exp(-\lambda)\frac{1}{2} \\<br>(exp(x)&#x3D;\sum_{k \geq 0}\frac{x^k}{k!}) \qquad &amp;&#x3D;\frac{1}{2}[\sum_{k \geq 0} \frac{\lambda^k}{k!} + \sum_{k \geq 0} \frac{(-\lambda)^k}{k!}] \\<br>\text{odd term cancel} \qquad &amp; &#x3D; 0\\<br>\text{even term exist} \qquad &amp; &#x3D; \sum_{k&#x3D;0}^\infty \frac{\lambda^{2k}}{(2k)!}<br>\end{aligned}<br>$$</p>
+<p>Now, we need to know that:<br>$$<br>(2k)!&#x3D;(2k)(2k-1)(2k-2)….(k!) \geq 2^kk!<br>$$<br>$$<br>\begin{aligned}<br>\sum_{k&#x3D;0}^\infty \frac{\lambda^{2k}}{(2k)!} &amp;\leq \sum_{k&#x3D;0}^\infty \frac{\lambda^{2k}}{2^kk!} \\<br>\text{due to}\sum_{k&#x3D;0}^\infty \frac{\lambda^{2k}}{2^kk!}&#x3D;exp(\frac{\lambda^2}{2})  \qquad &amp;\leq exp(\frac{\lambda^2}{2})<br>\end{aligned}<br>$$</p>
+<h3 id="Let-X-be-any-r-v"><a href="#Let-X-be-any-r-v" class="headerlink" title="Let X be any r.v."></a>Let X be any r.v.</h3><p>$X \in [-1, 1]$, Then $X$ is 1-sub-Gaussion</p>
+<h3 id="Proofing-1"><a href="#Proofing-1" class="headerlink" title="Proofing"></a>Proofing</h3><p>“symmetry argument”: Introduce $X’$ as an iid(independent and identically distributed) draw of $X$.<br>Observe(obs):<br>$\epsilon$ is still Rademacher<br>$$X’-X \underset{\text{distribution}}{&#x3D;} X-X’ \underset{\text{distribution}}{&#x3D;} \epsilon(X-X’)$$</p>
+<p>$$<br>\begin{aligned}<br>\mathbb{E}[exp(\lambda(x-\mathbb{E}(x)))] &amp;&#x3D; \underset{x}{\mathbb{E}} [exp(\lambda(x-\underset{x’}{\mathbb{E}}(x’)))]\\<br>&amp;&#x3D;\underset{x}{\mathbb{E}}[exp(\underset{x’}{\mathbb{E}}[\lambda(x-x’)])] \qquad (X \perp X’) \\<br>&amp;\leq \underset{x,x’}{\mathbb{E}}[exp(\lambda(x-x’))] \qquad \text{Jensen’s ineq: If f is convex,} \mathbb{E}[f(x)] \geq f(\mathbb{E}[x]) \\<br>&amp;&#x3D; \underset{x,x’,\epsilon}{\mathbb{E}}[exp(\lambda(x-x’)\epsilon)] \qquad (X-X’ \underset{\text{distribution}}{&#x3D;} \epsilon(X-X’)) \\<br>&amp;&#x3D; \underset{x,x’}{\mathbb{E}} \underset{\epsilon}{\mathbb{E}}[exp(\lambda(x-x’)\epsilon)] \qquad (\lambda(x-x’) \text{is constant to }\epsilon \text{ in } \underset{\epsilon}{\mathbb{E}}[]) \\<br>&amp;\leq \underset{x,x’}{\mathbb{E}}[exp(\frac{\lambda^2(x-x’)^2}{2})] \qquad (\text{due to } \epsilon \text{ is 1-sub Gaussion}) \\<br>&amp;\leq exp(\frac{\lambda^2(2)^2}{2}) \qquad (\text{due to the bound of x, 1-(-1)&#x3D;2, max diff is 2}) \\<br>\end{aligned}<br>$$</p>
+<h2 id="Heoffding’s-inequality"><a href="#Heoffding’s-inequality" class="headerlink" title="Heoffding’s inequality"></a>Heoffding’s inequality</h2><p><code>Heoffding&#39;s inequality</code></p>
+<h3 id="Proofing-2"><a href="#Proofing-2" class="headerlink" title="Proofing:"></a>Proofing:</h3><p><strong>Claim</strong>: Let $x_1$, $x_2$, $x_3$,…,$x_n$ be independent random variables. Suppose $X_i$ is $\sigma_i$-sub-Gaussion.<br>Then $S_n&#x3D;\sum_{i&#x3D;1}^nx_i$ is $\sqrt{\sum_{i&#x3D;1}^n \sigma_i^2}$-sub-Gaussion.</p>
+<p><strong>Claim</strong>:Let $X$ be $\sigma$-sub-Gaussison.<br>Then $\alpha X$ is $|\alpha|\sigma$-sub-Gaussison.</p>
+<p><strong>Claim</strong>:Let $X$ be $a$-sub-Gaussison, $X \in [-a, a]$. Given $X_i \in [-a_i, a_i]$, $X_i$ s are independent.<br>Then $S_n&#x3D;\sum_{i&#x3D;1}^nx_i$ is $\sqrt{\sum_{i&#x3D;1}^n a_i^2}$-sub-Gaussison.</p>
+<p>Now, proof:</p>
+<blockquote>
+<p>$$\mathbb{P}\{S_n-\mathbb{E}[S_n] \geq t \} \leq exp(\frac{-t^2}{2 \sum_{i&#x3D;1}^n a_i^2})$$</p>
+</blockquote>
+<!-- <svg style="position: absolute; display: inline-block; top: 10px;" width="100" height="100">
+    <path d="M 0 0 Q 100 50 0 100" stroke="white" fill="transparent" stroke-width="2"/>
+</svg> -->
+
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Sheng Wang</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://shengwang.fun/2024/10/20/ML5/">https://shengwang.fun/2024/10/20/ML5/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/ML/"># ML</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2024/10/20/ML6/">ML6</a>
+            
+            
+            <a class="next" rel="next" href="/2024/10/20/ML4/">ML4</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Sheng Wang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+
+    </div>
+</body>
+
+</html>

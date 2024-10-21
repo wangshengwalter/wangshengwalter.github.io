@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sheng Wang">
+
+
+
+
+
+<title>游戏AI | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/flask1.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        
+<header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">ChengCheng&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+    <!-- url("https://unsplash.it/1228/880?image=302") -->
+    <!-- style="background-image: url(/image/backimg.jpg)" -->
+
+
+    
+
+    
+
+
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ChengCheng&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+
+    var posttitle_exist = function(){
+        var titletext = document.getElementById("text");
+        if(titletext == null) return;
+        
+        var textWidth = titletext.getComputedTextLength();
+        console.log(textWidth);
+        var pageWidth = window.innerWidth;
+        console.log(pageWidth);
+        if(textWidth > pageWidth){
+            document.getElementById("eff").style.display = "none";
+        }
+        else{
+            document.getElementById("eff").style.display = "block";
+        }
+    }
+    
+    window.onload = posttitle_exist;
+    window.onresize = posttitle_exist;
+</script>
+
+<div class="container">
+    
+        <aside class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</aside>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title" itemprop="name headline">游戏AI</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Sheng Wang</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">October 6, 2024&nbsp;&nbsp;10:12:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/AI/">AI</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="研究人类个体行为"><a href="#研究人类个体行为" class="headerlink" title="研究人类个体行为"></a>研究人类个体行为</h1><blockquote>
+<p>关于研究人类个体行为的书籍有很多，涵盖心理学、社会学、行为经济学等多个领域。以下是一些经典的书籍推荐：</p>
+</blockquote>
+<ol>
+<li><p>《社会性动物》（The Social Animal） - 艾略特·阿伦森（Elliot Aronson）<br>这是一本关于社会心理学的经典之作，深入探讨了人类行为的社会性来源。书中分析了个体如何在社会环境中受到他人影响，并解释了社会关系如何塑造我们的行为。</p>
+</li>
+<li><p>《影响力》（Influence: The Psychology of Persuasion） - 罗伯特·西奥迪尼（Robert B. Cialdini）<br>本书深入剖析了为什么人们会在日常生活中被他人影响，探讨了说服和行为改变的心理学基础。通过大量实验案例，展示了人类行为背后的心理学原理。</p>
+</li>
+<li><p>《怪诞行为学》（Predictably Irrational） - 丹·艾瑞里（Dan Ariely）<br>这本书揭示了人类行为的非理性本质，解释了我们为什么在许多场合做出看似不合理的决策。艾瑞里通过实验展示了个体如何在情感、环境等因素影响下做出行为选择。</p>
+</li>
+<li><p>《思考，快与慢》（Thinking, Fast and Slow） - 丹尼尔·卡尼曼（Daniel Kahneman）<br>诺贝尔经济学奖得主卡尼曼的这本书探讨了人类思维的两种模式——快速直觉型思维与慢速理性型思维，揭示了这两种模式如何影响我们在生活中的决策与行为。</p>
+</li>
+<li><p>《自私的基因》（The Selfish Gene） - 理查德·道金斯（Richard Dawkins）<br>从进化生物学的角度出发，道金斯提出了基因自私性的概念，并解释了个体行为如何受到基因和自然选择的影响。这本书为理解人类行为提供了一个生物学视角。</p>
+</li>
+<li><p>《习惯的力量》（The Power of Habit） - 查尔斯·都希格（Charles Duhigg）<br>这本书深入探讨了习惯如何形成，并如何影响我们的行为模式。通过对个人、组织和社会的研究，作者展示了习惯是如何塑造行为并影响生活的各个方面。</p>
+</li>
+<li><p>《乌合之众》（The Crowd: A Study of the Popular Mind） - 古斯塔夫·勒庞（Gustave Le Bon）<br>这是群体心理学的经典著作，探讨了群体行为如何影响个体，群体中的人们为何表现出不同于个体的行为模式。尽管本书有一定的历史局限性，但对理解人类行为仍有启发性。</p>
+</li>
+<li><p>《快公司：行为经济学如何解释一切》（Nudge: Improving Decisions About Health, Wealth, and Happiness） - 理查德·塞勒（Richard Thaler） &amp; 卡斯·桑斯坦（Cass Sunstein）<br>本书介绍了“助推”（nudge）理论，解释了如何通过小小的行为干预来影响个人的决策和行为，并且探讨了这种干预对经济和社会的影响。</p>
+</li>
+</ol>
+<p>这些书籍从不同的学科和视角探讨了人类个体行为的各种现象，可以根据你感兴趣的具体领域进一步深入研究。</p>
+<h1 id="AI与情感"><a href="#AI与情感" class="headerlink" title="AI与情感"></a>AI与情感</h1><blockquote>
+<p>研究AI情感及其在计算机系统中的建模和模拟涉及跨学科的知识，包括人工智能、心理学、神经科学和哲学等领域。以下是一些关键的书籍、论文和研究方向，涉及AI如何为人类情感建模与模拟：</p>
+</blockquote>
+<h3 id="1-情感计算（Affective-Computing）"><a href="#1-情感计算（Affective-Computing）" class="headerlink" title="1. 情感计算（Affective Computing）"></a>1. <strong>情感计算（Affective Computing）</strong></h3><p>   这是人工智能领域的一个重要分支，旨在开发能够识别、理解、模拟和表现人类情感的系统。Affective Computing这个术语由罗莎琳德·皮卡德（Rosalind W. Picard）在其经典著作《<strong>Affective Computing</strong>》（1997）中首次提出。</p>
+<ul>
+<li><strong>推荐书籍：</strong><ul>
+<li><strong>《Affective Computing》</strong> - Rosalind W. Picard<br>皮卡德的这本书开创了情感计算领域，提出了如何通过计算方法识别和模拟人类情感。该书对于理解AI情感建模的基础和未来方向至关重要。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-情感AI中的多模态建模"><a href="#2-情感AI中的多模态建模" class="headerlink" title="2. 情感AI中的多模态建模"></a>2. <strong>情感AI中的多模态建模</strong></h3><p>   情感AI（Affective AI）通常通过多种传感器（如面部表情、语音语调、生理信号等）来捕捉人类情感反应，并建立数学模型来分析和模拟这些情感。近年来的研究主要集中在多模态建模上，试图通过结合多种数据源来提高情感识别的准确性。</p>
+<ul>
+<li><strong>重要论文：</strong><ul>
+<li><p><strong>Zeng, Z., Pantic, M., Roisman, G. I., &amp; Huang, T. S. (2009). “A survey of affect recognition methods: Audio, visual, and spontaneous expressions.”</strong> <em>IEEE Transactions on Pattern Analysis and Machine Intelligence</em>.<br>这篇论文系统性地回顾了情感识别的不同方法，特别是基于视觉、语音和多模态信号的技术。</p>
+</li>
+<li><p><strong>Poria, S., Cambria, E., Bajpai, R., &amp; Hussain, A. (2017). “A review of affective computing: From unimodal analysis to multimodal fusion.”</strong> <em>Information Fusion</em>.<br>这篇综述文章提供了情感计算从单模态分析（如仅基于语音或图像）到多模态融合（结合多种情感信号）的发展历程。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-情感模型（Emotion-Modeling）"><a href="#3-情感模型（Emotion-Modeling）" class="headerlink" title="3. 情感模型（Emotion Modeling）"></a>3. <strong>情感模型（Emotion Modeling）</strong></h3><p>   在为AI系统建模人类情感时，通常使用心理学中提出的情感模型，如：</p>
+<ul>
+<li><p><strong>Ekman’s Six Basic Emotions（艾克曼的六种基本情感）：</strong> 喜、怒、忧、恐、厌、惊</p>
+</li>
+<li><p><strong>Russell’s Circumplex Model of Affect（罗素的情感圆环模型）：</strong> 使用二维情感空间（愉悦-不愉悦、激动-平静）来描述情感状态。</p>
+</li>
+<li><p><strong>推荐论文：</strong></p>
+<ul>
+<li><p><strong>Ekman, P. (1992). “An argument for basic emotions.”</strong> <em>Cognition and Emotion</em>.<br>本文提出了艾克曼的基本情感理论，至今仍是情感计算领域的基础之一。</p>
+</li>
+<li><p><strong>Russell, J. A. (1980). “A circumplex model of affect.”</strong> <em>Journal of Personality and Social Psychology</em>.<br>这篇论文介绍了情感圆环模型，该模型被广泛应用于AI情感模拟，尤其是多维情感建模中。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-AI情感交互中的深度学习"><a href="#4-AI情感交互中的深度学习" class="headerlink" title="4. AI情感交互中的深度学习"></a>4. <strong>AI情感交互中的深度学习</strong></h3><p>   近年来，深度学习技术显著提升了AI在情感识别和生成方面的能力。通过使用卷积神经网络（CNN）、递归神经网络（RNN）和其他深度学习架构，AI能够更好地识别人类情感并生成更自然的情感反应。</p>
+<ul>
+<li><strong>推荐论文：</strong><ul>
+<li><p><strong>Hazarika, D., Poria, S., Cambria, E., &amp; Zimmermann, R. (2018). “Conversational Memory Network for Emotion Recognition in Dyadic Dialogue.”</strong> <em>Proceedings of the Conference of the North American Chapter of the Association for Computational Linguistics (NAACL)</em>.<br>这篇论文探讨了如何利用深度学习中的对话记忆网络（CMN）来提高对话情感识别的性能。</p>
+</li>
+<li><p><strong>Zhao, J., &amp; Wang, S. (2021). “Transformer-Based Emotion Recognition in Conversation Using Audio and Text.”</strong> <em>IEEE Transactions on Affective Computing</em>.<br>本文提出了基于Transformer的情感识别模型，展示了如何使用文本和语音数据进行多模态情感识别。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-情感生成与仿真"><a href="#5-情感生成与仿真" class="headerlink" title="5. 情感生成与仿真"></a>5. <strong>情感生成与仿真</strong></h3><p>   除了情感识别，情感生成也是一个重要领域。这里涉及到如何使AI表现出情感，或根据上下文生成合适的情感反应。情感生成在机器人、虚拟助手和游戏角色中具有广泛的应用。</p>
+<ul>
+<li><strong>推荐论文：</strong><ul>
+<li><p><strong>Gadanho, S. C., &amp; Hallam, J. (2001). “Emotion-triggered learning in autonomous robot control.”</strong> <em>Cybernetics and Systems: An International Journal</em>.<br>本文探讨了如何将情感触发机制应用于自主机器人控制中，使机器人能够根据情感状态调整行为。</p>
+</li>
+<li><p><strong>Gratch, J., &amp; Marsella, S. (2004). “A domain-independent framework for modeling emotion.”</strong> <em>Journal of Cognitive Systems Research</em>.<br>这篇论文提出了一种与具体应用领域无关的情感建模框架，适用于各种情境中的情感仿真和生成。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-伦理与哲学探讨"><a href="#6-伦理与哲学探讨" class="headerlink" title="6. 伦理与哲学探讨"></a>6. <strong>伦理与哲学探讨</strong></h3><p>   设计能够模拟和生成情感的AI系统，还涉及许多伦理和哲学问题。例如，AI是否可以真正“理解”情感，还是仅仅在表面上表现出来？这种模拟是否会影响人类与机器的互动方式？</p>
+<ul>
+<li><strong>推荐书籍：</strong><ul>
+<li><strong>《Superintelligence: Paths, Dangers, Strategies》</strong> - Nick Bostrom<br>这本书讨论了超级智能机器的潜在风险，包括AI模拟情感和理解情感的哲学和伦理问题。</li>
+</ul>
+</li>
+</ul>
+<p>这些书籍和论文为研究AI情感建模和模拟提供了重要的理论基础和实践方法。如果你对如何实际建模和模拟人类情感有特别的兴趣，可以根据具体技术、算法或应用场景进行更深的探索。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Sheng Wang</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://shengwang.fun/2024/10/06/GameAI1/">https://shengwang.fun/2024/10/06/GameAI1/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/AI/"># AI</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2024/10/20/markdownmath/">Markdown Math Format</a>
+            
+            
+            <a class="next" rel="next" href="/2024/07/27/love/"></a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Sheng Wang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+
+    </div>
+</body>
+
+</html>
