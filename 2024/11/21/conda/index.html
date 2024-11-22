@@ -13,7 +13,7 @@
 
 
 
-<title>ML6 | Hexo</title>
+<title>Conda Command | Hexo</title>
 
 
 
@@ -40,45 +40,6 @@
 
     
     
-        
-            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-    "HTML-CSS": {
-        preferredFont: "TeX",
-        availableFonts: ["STIX","TeX"],
-        linebreaks: { automatic:true },
-        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
-    },
-    tex2jax: {
-        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
-        processEscapes: true,
-        ignoreClass: "tex2jax_ignore|dno",
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        equationNumbers: { autoNumber: "AMS" },
-        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
-        Macros: { href: "{}" }
-    },
-    messageStyle: "none"
-    });
-</script>
-<!-- 给MathJax元素添加has-jax class -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<!-- 通过连接CDN加载MathJax的js代码 -->
-<script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-
-
         
     
 
@@ -259,7 +220,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title" itemprop="name headline">ML6</h1>
+            <h1 class="post-title" itemprop="name headline">Conda Command</h1>
             
                 <div class="post-meta">
                     
@@ -268,61 +229,27 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">October 20, 2024&nbsp;&nbsp;4:02:00</a>
+                        Date: <a href="#">November 21, 2024&nbsp;&nbsp;1:17:00</a>
                         </span>
                     
-                    
-                        <span class="post-category">
-                    Category:
-                            
-                                <a href="/categories/ML/">ML</a>
-                            
-                        </span>
                     
                 </div>
             
         </header>
 
         <div class="post-content">
-            <h1 id="Rademacher-Complexity"><a href="#Rademacher-Complexity" class="headerlink" title="Rademacher Complexity"></a>Rademacher Complexity</h1><h2 id="Define"><a href="#Define" class="headerlink" title="Define"></a>Define</h2><p>Let $F:X\mapsto\mathbb{R}$. The Rademacher Complexity $R_n(F)$ is defined as:</p>
-<p>$$<br>R_n(F) &#x3D; \underset{ \epsilon_i,x_i }{\mathbb{E}} \underset{f \in F}{sup} (n^{-1} \sum_{i&#x3D;1}^n \epsilon_i f(x_i))<br>$$</p>
-<ul>
-<li>$n$ is data size</li>
-<li>sup(supremum) is least upper bound of a set; here we are trying to find the worest case function in the function class $F$.</li>
-</ul>
-<p>$$<br>R_n(F) &#x3D; \mathbb{E} \underset{f \in F}{sup} (n^{-1} \langle \epsilon, f  \rangle)<br>$$</p>
-<ul>
-<li>$\epsilon \in (\epsilon_1, ….., \epsilon_n)$</li>
-<li>$f \in (f(x_1), ….., f(x_n))$</li>
-</ul>
-<blockquote>
-<p>this quantity here is actually what governs uniform deviations between population and training values</p>
-</blockquote>
-<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples:"></a>Examples:</h2><h3 id="Two-extremes"><a href="#Two-extremes" class="headerlink" title="Two extremes"></a>Two extremes</h3><p><strong>Worest case</strong>  </p>
-<blockquote>
-<p>$F$ &#x3D; {all functions mapping $X \mapsto [-1, 1]$}.  </p>
-</blockquote>
-<p>$R_n(F)&#x3D;1$, $[f(x_i) &#x3D; \epsilon_i]$<br><strong>best case</strong>  </p>
-<blockquote>
-<p>$F &#x3D; {f}$, $F$ is single function.</p>
-</blockquote>
-<p>$R_n(F)&#x3D;0$</p>
-<h3 id="one-normal-example"><a href="#one-normal-example" class="headerlink" title="one normal example"></a>one normal example</h3><blockquote>
-<p>The L2 norm (also called the Euclidean norm or L2 normal) is a way to measure the “length” or “magnitude” of a vector in Euclidean space. It is a specific instance of the more general Lp norms used to measure the size of objects in various mathematical spaces.<br>For a vector $x &#x3D; (x_1, x_2,…,x_n)$, the L2 norm is defined as:<br>$|x|_2 &#x3D; \sqrt{x_1^2+x_2^2+…+x_n^2}$</p>
-</blockquote>
-<h4 id="Now"><a href="#Now" class="headerlink" title="Now:"></a>Now:</h4><blockquote>
-<p>$F&#x3D;\{X \mapsto &lt;W, X&gt; |\qquad |W|_2 \leq 1 \}   \qquad W \in \mathbb{R}^d$<br>$ x_1, …x_n \underset{iid}{\sim} N(0,I)$  distribution with zero mean and identity covariance. </p>
-</blockquote>
-<p>$$<br>\begin{aligned}<br>R_n(F) &amp;&#x3D; \underset{\epsilon_i, x_i}{\mathbb{E}} \underset{f \in F}{sup} (\frac{1}{n} \sum_{i&#x3D;1}^n \epsilon_i f(x_i)) \\<br>&amp;&#x3D; \underset{\epsilon_i, x_i}{\mathbb{E}} \underset{\lvert w \rvert_2 \leq 1}{sup} (\frac{1}{n} \sum_{i&#x3D;1}^n \epsilon_i &lt;x_i, w&gt;) \quad \text{(def of F)}\\<br>&amp;&#x3D;\underset{\epsilon_i, x_i}{\mathbb{E}} \underset{\lvert w \rvert_2 \leq 1}{sup} &lt;(\frac{1}{n} \sum_{i&#x3D;1}^n \epsilon_i x_i, w)&gt;  \quad (\text{linearity of } x \mapsto &lt;x,w&gt;)\\<br>&amp;&#x3D;\underset{\epsilon_i, x_i}{\mathbb{E}}  \lvert \frac{1}{n} \sum_{i&#x3D;1}^n \epsilon_i x_i \rvert_2  \quad (\text{dual normal characterization of } L_2: \underset{\lvert x \rvert_2 \leq 1}{sup} &lt;x,q&gt; &#x3D; \lvert q \rvert_2)\\<br>&amp;&#x3D;\underset{\epsilon_i, x_i}{\mathbb{E}} \sqrt{( \lvert \frac{1}{n} \sum_{i&#x3D;1}^n \epsilon_i x_i \rvert_2)^2}\\<br>&amp;\leq \sqrt{\underset{\epsilon_i, x_i}{\mathbb{E}}( \lvert \frac{1}{n} \sum_{i&#x3D;1}^n \epsilon_i x_i \rvert_2)^2} \quad \text{Jensent } \sqrt{} \text{ is concave}\\<br>&amp;&#x3D;\sqrt{\frac{1}{n^2} \sum_{i&#x3D;1}^n\underset{x_i}{\mathbb{E}}( \lvert x_i \rvert)^2} \quad (\epsilon_i \perp \epsilon_j, i\neq j, \mathbb{E}(\epsilon_i) &#x3D; 0)\\<br>&amp;&#x3D;\sqrt{\frac{d}{n}}\\<br>\end{aligned}<br>$$</p>
-<h2 id="Main-punch-line"><a href="#Main-punch-line" class="headerlink" title="Main punch line:"></a>Main punch line:</h2><p>Let $F$ map $X \mapsto \mathbb{R}$, let $x_1$……$x_n$ are iid from $\mathbb{D}$.<br>$$<br>\mathbb{E}[\underset{f \in F}{sup}(\mathbb{E}[f(x)]- \frac{1}{n} \sum_{i&#x3D;1}^n f(x_i))] \leq 2R_n(F)<br>$$<br>$$<br>\mathbb{E}[\underset{f \in F}{sup} \frac{1}{n} \sum_{i&#x3D;1}^n (\mathbb{E}[f(x_i)]-f(x_i))] \leq 2R_n(F)<br>$$</p>
-<ul>
-<li>$\mathbb{E}[f(x)]$ is population level value</li>
-<li>$\frac{1}{n} \sum_{i&#x3D;1}^n f(x_i)$ is sample level value</li>
-</ul>
-<blockquote>
-<p>This is just a statement about sort of uniform deviations between population and training or sample averages versus population averages</p>
-</blockquote>
-<h1 id="9-12-miss-leacture-note"><a href="#9-12-miss-leacture-note" class="headerlink" title="9&#x2F;12 miss leacture note!!!!!"></a>9&#x2F;12 miss leacture note!!!!!</h1>
+            <h1 id="Conda-Command"><a href="#Conda-Command" class="headerlink" title="Conda Command"></a>Conda Command</h1><ol>
+<li>Get a list of all my environments, active<br>environment is shown with *<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda env list</span><br></pre></td></tr></table></figure></li>
+<li>List all packages and versions installed in active environment<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda list</span><br></pre></td></tr></table></figure></li>
+<li>create an environment<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create --name &lt;my-env&gt;</span><br></pre></td></tr></table></figure></li>
+<li>Create a new environment named py35, install Python 3.5<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create --name py35 python=3.5 </span><br></pre></td></tr></table></figure></li>
+<li>Make exact copy of an environment<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create --clone py35 --name py35-2</span><br></pre></td></tr></table></figure></li>
+<li>Delete an environment and everything in it<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda env remove --name bio-env</span><br></pre></td></tr></table></figure></li>
+<li>Verify conda is installed, check version number<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda info</span><br></pre></td></tr></table></figure></li>
+<li>Install a package included in Anaconda<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install PACKAGENAME </span><br></pre></td></tr></table></figure></li>
+<li>Update any installed program<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda update PACKAGENAME</span><br></pre></td></tr></table></figure></li>
+</ol>
+
         </div>
 
         
@@ -336,7 +263,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="https://shengwang.fun/2024/10/20/ML6/">https://shengwang.fun/2024/10/20/ML6/</a></span>
+                        <span><a href="https://shengwang.fun/2024/11/21/conda/">https://shengwang.fun/2024/11/21/conda/</a></span>
                     </p>
                 
                 
@@ -354,10 +281,6 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
-                    
-                        <a href="/tags/ML/"># ML</a>
-                    
-                        
                 </span>
             </div>
             <div>
@@ -368,10 +291,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2024/10/24/ML7/">ML7</a>
             
-            
-            <a class="next" rel="next" href="/2024/10/20/ML5/">ML5</a>
+            <a class="next" rel="next" href="/2024/10/30/ML8/">ML8</a>
             
         </section>
 

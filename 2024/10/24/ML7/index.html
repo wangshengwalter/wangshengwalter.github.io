@@ -13,7 +13,7 @@
 
 
 
-<title>ML6 | Hexo</title>
+<title>ML7 | Hexo</title>
 
 
 
@@ -259,7 +259,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title" itemprop="name headline">ML6</h1>
+            <h1 class="post-title" itemprop="name headline">ML7</h1>
             
                 <div class="post-meta">
                     
@@ -268,7 +268,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">October 20, 2024&nbsp;&nbsp;4:02:00</a>
+                        Date: <a href="#">October 24, 2024&nbsp;&nbsp;23:33:00</a>
                         </span>
                     
                     
@@ -284,45 +284,54 @@
         </header>
 
         <div class="post-content">
-            <h1 id="Rademacher-Complexity"><a href="#Rademacher-Complexity" class="headerlink" title="Rademacher Complexity"></a>Rademacher Complexity</h1><h2 id="Define"><a href="#Define" class="headerlink" title="Define"></a>Define</h2><p>Let $F:X\mapsto\mathbb{R}$. The Rademacher Complexity $R_n(F)$ is defined as:</p>
-<p>$$<br>R_n(F) &#x3D; \underset{ \epsilon_i,x_i }{\mathbb{E}} \underset{f \in F}{sup} (n^{-1} \sum_{i&#x3D;1}^n \epsilon_i f(x_i))<br>$$</p>
-<ul>
-<li>$n$ is data size</li>
-<li>sup(supremum) is least upper bound of a set; here we are trying to find the worest case function in the function class $F$.</li>
-</ul>
-<p>$$<br>R_n(F) &#x3D; \mathbb{E} \underset{f \in F}{sup} (n^{-1} \langle \epsilon, f  \rangle)<br>$$</p>
-<ul>
-<li>$\epsilon \in (\epsilon_1, ….., \epsilon_n)$</li>
-<li>$f \in (f(x_1), ….., f(x_n))$</li>
-</ul>
+            <h1 id="ERM"><a href="#ERM" class="headerlink" title="ERM"></a>ERM</h1><p>Find $\hat{f}_{erm} \in F$, such that $\hat{f}_{erm} &#x3D; arg min_{f \in F} \frac{1}{n} \sum_n^{i&#x3D;1} l(f(x_i), y_i)$</p>
+<h1 id="Stochastic-Gradient-methods"><a href="#Stochastic-Gradient-methods" class="headerlink" title="(Stochastic) Gradient methods"></a>(Stochastic) Gradient methods</h1><p>Assume parametric form for $F$. <br>$$F&#x3D; \{  f_\theta(x) | \theta \in \Theta\}$$<br>$$\Theta \in \mathbb{R}^p$$<br>$\Theta$ is a p dimensional vector and which going to parameterize the weights of our model. </p>
+<p>Here is some example: </p>
+<p>(linear classes) $f_\theta(x) &#x3D; &lt;\theta, x&gt;$ </p>
+<p>(Hidden layer of neural network) $f_\theta(x)&#x3D; W_1 \cdot \sigma(W_2 x) $ <br>$\theta &#x3D; (W_1, W_2)$ </p>
+<h2 id="Gradient-descent"><a href="#Gradient-descent" class="headerlink" title="Gradient descent"></a>Gradient descent</h2><p>In general: <br>$F: \mathbb{R}^P \mapsto \mathbb{R}$ <br>$F$ is at least once differentiable <br>We want to find $min_{\theta \in \mathbb{R}^P} F(\theta)$ <br>Basic algorithm: <br>$\theta_{t+1} &#x3D; \theta_t - \eta \Delta F(\theta_t)$ <br>$\eta \gt 0$ is step size </p>
 <blockquote>
-<p>this quantity here is actually what governs uniform deviations between population and training values</p>
+<p>Not alwyas have minimum. </p>
 </blockquote>
-<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples:"></a>Examples:</h2><h3 id="Two-extremes"><a href="#Two-extremes" class="headerlink" title="Two extremes"></a>Two extremes</h3><p><strong>Worest case</strong>  </p>
-<blockquote>
-<p>$F$ &#x3D; {all functions mapping $X \mapsto [-1, 1]$}.  </p>
-</blockquote>
-<p>$R_n(F)&#x3D;1$, $[f(x_i) &#x3D; \epsilon_i]$<br><strong>best case</strong>  </p>
-<blockquote>
-<p>$F &#x3D; {f}$, $F$ is single function.</p>
-</blockquote>
-<p>$R_n(F)&#x3D;0$</p>
-<h3 id="one-normal-example"><a href="#one-normal-example" class="headerlink" title="one normal example"></a>one normal example</h3><blockquote>
-<p>The L2 norm (also called the Euclidean norm or L2 normal) is a way to measure the “length” or “magnitude” of a vector in Euclidean space. It is a specific instance of the more general Lp norms used to measure the size of objects in various mathematical spaces.<br>For a vector $x &#x3D; (x_1, x_2,…,x_n)$, the L2 norm is defined as:<br>$|x|_2 &#x3D; \sqrt{x_1^2+x_2^2+…+x_n^2}$</p>
-</blockquote>
-<h4 id="Now"><a href="#Now" class="headerlink" title="Now:"></a>Now:</h4><blockquote>
-<p>$F&#x3D;\{X \mapsto &lt;W, X&gt; |\qquad |W|_2 \leq 1 \}   \qquad W \in \mathbb{R}^d$<br>$ x_1, …x_n \underset{iid}{\sim} N(0,I)$  distribution with zero mean and identity covariance. </p>
-</blockquote>
-<p>$$<br>\begin{aligned}<br>R_n(F) &amp;&#x3D; \underset{\epsilon_i, x_i}{\mathbb{E}} \underset{f \in F}{sup} (\frac{1}{n} \sum_{i&#x3D;1}^n \epsilon_i f(x_i)) \\<br>&amp;&#x3D; \underset{\epsilon_i, x_i}{\mathbb{E}} \underset{\lvert w \rvert_2 \leq 1}{sup} (\frac{1}{n} \sum_{i&#x3D;1}^n \epsilon_i &lt;x_i, w&gt;) \quad \text{(def of F)}\\<br>&amp;&#x3D;\underset{\epsilon_i, x_i}{\mathbb{E}} \underset{\lvert w \rvert_2 \leq 1}{sup} &lt;(\frac{1}{n} \sum_{i&#x3D;1}^n \epsilon_i x_i, w)&gt;  \quad (\text{linearity of } x \mapsto &lt;x,w&gt;)\\<br>&amp;&#x3D;\underset{\epsilon_i, x_i}{\mathbb{E}}  \lvert \frac{1}{n} \sum_{i&#x3D;1}^n \epsilon_i x_i \rvert_2  \quad (\text{dual normal characterization of } L_2: \underset{\lvert x \rvert_2 \leq 1}{sup} &lt;x,q&gt; &#x3D; \lvert q \rvert_2)\\<br>&amp;&#x3D;\underset{\epsilon_i, x_i}{\mathbb{E}} \sqrt{( \lvert \frac{1}{n} \sum_{i&#x3D;1}^n \epsilon_i x_i \rvert_2)^2}\\<br>&amp;\leq \sqrt{\underset{\epsilon_i, x_i}{\mathbb{E}}( \lvert \frac{1}{n} \sum_{i&#x3D;1}^n \epsilon_i x_i \rvert_2)^2} \quad \text{Jensent } \sqrt{} \text{ is concave}\\<br>&amp;&#x3D;\sqrt{\frac{1}{n^2} \sum_{i&#x3D;1}^n\underset{x_i}{\mathbb{E}}( \lvert x_i \rvert)^2} \quad (\epsilon_i \perp \epsilon_j, i\neq j, \mathbb{E}(\epsilon_i) &#x3D; 0)\\<br>&amp;&#x3D;\sqrt{\frac{d}{n}}\\<br>\end{aligned}<br>$$</p>
-<h2 id="Main-punch-line"><a href="#Main-punch-line" class="headerlink" title="Main punch line:"></a>Main punch line:</h2><p>Let $F$ map $X \mapsto \mathbb{R}$, let $x_1$……$x_n$ are iid from $\mathbb{D}$.<br>$$<br>\mathbb{E}[\underset{f \in F}{sup}(\mathbb{E}[f(x)]- \frac{1}{n} \sum_{i&#x3D;1}^n f(x_i))] \leq 2R_n(F)<br>$$<br>$$<br>\mathbb{E}[\underset{f \in F}{sup} \frac{1}{n} \sum_{i&#x3D;1}^n (\mathbb{E}[f(x_i)]-f(x_i))] \leq 2R_n(F)<br>$$</p>
-<ul>
-<li>$\mathbb{E}[f(x)]$ is population level value</li>
-<li>$\frac{1}{n} \sum_{i&#x3D;1}^n f(x_i)$ is sample level value</li>
-</ul>
-<blockquote>
-<p>This is just a statement about sort of uniform deviations between population and training or sample averages versus population averages</p>
-</blockquote>
-<h1 id="9-12-miss-leacture-note"><a href="#9-12-miss-leacture-note" class="headerlink" title="9&#x2F;12 miss leacture note!!!!!"></a>9&#x2F;12 miss leacture note!!!!!</h1>
+<p>Applying to ERM<br>$$F &#x3D; \frac{1}{n} \sum_n^{i&#x3D;1} l(f(x_i), y_i)$$</p>
+<p>Q:</p>
+<ol>
+<li>What does $\theta_t$ converge to? </li>
+<li>How should we set $\eta$?</li>
+</ol>
+<p>A:</p>
+<p>Use Quadratic functions as a case study for Gradient descent.<br>pick $F(\theta) &#x3D; \frac{1}{2} \theta^TQ\theta - \theta^Tp$, <br>$Q$ is positive definite, and $p \in \mathbb{R}^d$.<br>What is the $arg \min_{\theta \in \mathbb{R}^P} F(\theta)$? <br>$\nabla F(\theta) &#x3D; Q \theta -p &#x3D; 0 \Rightarrow \theta_*&#x3D; Q^{-1}p$ <br>$Q$ is invertible due to it is positive definite. all its egenvalues are non negative, it has full rank, it is invertible. </p>
+<p>What does Gradient Descent do?<br>$$<br>\begin{aligned}<br>\theta_{t+1} &amp;&#x3D; \theta_t - \eta \cdot \nabla F(\theta_t) \\<br>&amp;&#x3D;\theta_t-\eta \cdot [Q \cdot \theta_t-p] \\<br>\end{aligned}<br>$$</p>
+<p>let delta t equal to the difference between theta t and theta star. <br>$\nabla_t &#x3D; \theta_t - \theta_*$ <br>$\nabla_{t+1} &#x3D; \theta_{t+1} - \theta_*$ <br>$\nabla_{t+1} &#x3D; \theta_t-\eta \cdot [Q \cdot \theta_t-p] - \theta_*$ <br>$\nabla_{t+1} &#x3D; \theta_t-\eta \cdot Q[ \theta_t-Q^{-1} \cdot p] - \theta_*$ <br>because $Q^{-1} \cdot p &#x3D; \theta_*$ <br>Thus, $\nabla_{t+1} &#x3D; \theta_t - \theta_*-\eta \cdot Q[ \theta_t-\theta_*] $ <br>$\nabla_{t+1} &#x3D; \nabla_t-\eta \cdot Q[ \nabla_t] $ <br>$\nabla_{t+1} &#x3D; [I-\eta \cdot Q] \cdot \nabla_t $ </p>
+<p>Thus, we can get the equation:  <br>$\nabla_{t} &#x3D; [I-\eta \cdot Q]^t \cdot \nabla_0 $ </p>
+<p>What is the eigenvalues of $I-\eta \cdot Q$? <br>Let $\lambda_1 \geq \lambda_2 \geq … \geq \lambda_d$ are eigenvalues of Q <br>$\{ 1-\eta \lambda_i\}^d_{i&#x3D;1}$ are the eigenvalue of $I-\eta \cdot Q$ <br>We need $\{ 1-\eta \lambda_i\}^d_{i&#x3D;1}$ always less than 1, then when $t$ increate, the $\nabla_{t}$ can grow exponentially small. <br>Now, if we need $ 1-\eta \lambda_i \geq 0$ <br>Which means $\eta \leq \frac{1}{\lambda_i} \quad \forall i$ </p>
+<p>Now, we need to make $1-\eta \lambda_i$ as small as possible, we need $\eta$ as large as we can, a large step size as we can. <br>$\eta$ should saturates this constraint. <br>So, the largest eigenvalue is $1-\frac{min(\lambda_Q)}{max(\lambda_Q)}$ <br>Thus, $eigval(I-\eta Q) \in [0, 1-\frac{min(\lambda_Q)}{max(\lambda_Q)}]$ <br>Then, there is a define: <br>$\forall v, \quad ||(I-\eta Q)v|| \leq (1-\frac{min(\lambda_Q)}{max(\lambda_Q)})|v|$ <br>Thus max single value of $(I-\eta Q) \leq 1-\frac{min(\lambda_Q)}{max(\lambda_Q)}$ <br>Thus, $|\nabla_t| \leq (1-\frac{min(\lambda_Q)}{max(\lambda_Q)})^t \cdot |\nabla_0|$ <br>$\nabla_0$ is inital error <br>Thus, as $t \mapsto \infty $, the error goes to zero.</p>
+<h2 id="GD-converges-to-stationary-point-nabla-F-0"><a href="#GD-converges-to-stationary-point-nabla-F-0" class="headerlink" title="GD converges to stationary point, $(\nabla F &#x3D; 0)$"></a>GD converges to stationary point, $(\nabla F &#x3D; 0)$</h2><p>We are going to show $|\nabla F(\theta_t)| \mapsto 0$.<br>But, we need to pay attentation on local minimum and saddle point. we will not consider these point.</p>
+<p>Assume $F$ is “L-smooth”: <br>$\forall u,v \in \mathbb{R}^d$ <br>$F(v) \leq F(u)+\nabla F(u) \cdot (v-u)+\frac{L}{2} ||u-v||^2$ <br>The gradient $\nabla F$ is L-lipschitz. <br>$|\nabla F(u) - \nabla F(v)| \leq L||u-v||$ </p>
+<p>Now, suppose that $F$ is “L-smooth”, and $F \geq 0$, for any $0 \lt \eta \leq \frac{1}{L}$. <br>GD satisfies:<br>$$<br>min_{t \in (0,…,T-1)}|\nabla F(\theta_t)|^2 \leq \frac{2F(\theta_0)}{\eta \cdot T}<br>$$</p>
+<p>Proof:<br>Apply L-smooth<br>$$<br>F(\theta_{t+1}) \leq F(\theta_t)+\nabla F(\theta_t) \cdot (\theta_{t+1}-\theta_t)+\frac{L}{2} |\theta_{t+1}-\theta_t|^2<br>$$<br>We know that $\theta_{t+1}-\theta_t &#x3D; -\eta \nabla F(\theta_t)$ <br>Thus:<br>$$<br>F(\theta_{t+1}) \leq F(\theta_t)+\eta |\nabla F(\theta_t)|^2 +\frac{L \eta^2}{2} |\nabla F(\theta_t)|^2<br>$$</p>
+<p>$\eta |\nabla F(\theta_t)|^2$ looks like descent on $F$<br>$\frac{L \eta^2}{2} |\nabla F(\theta_t)|^2$ looks like error of quadratic approx.<br>$$<br>F(\theta_{t+1}) \leq F(\theta_t)-\eta(1-\frac{L \eta}{2}) |\nabla F(\theta_t)|^2<br>$$<br>We need to set $1-\frac{L \eta}{2} \geq \frac{1}{2}$ <br>Which means $\eta \leq \frac{1}{L}$<br>thus<br>$$<br>F(\theta_{t+1}) \leq F(\theta_t)-\frac{\eta}{2} |\nabla F(\theta_t)|^2<br>$$</p>
+<p>This, means GD actually makes some progress every iter unless $\nabla F&#x3D;0$</p>
+<p>$$<br>F(\theta_{t+1}) \leq F(\theta_{t-1})-\frac{\eta}{2} |\nabla F(\theta_{t-1})|^2-\frac{\eta}{2} |\nabla F(\theta_t)|^2<br>$$</p>
+<p>$$<br>F(\theta_{t}) \leq F(\theta_0) - \frac{\eta}{2} \sum^{t-1}_{i&#x3D;0}|\nabla F(\theta_i)|^2<br>$$</p>
+<p>$$<br>\sum^{t-1}_{i&#x3D;0}|\nabla F(\theta_i)|^2 \leq \frac{2(F(\theta_0) - F(\theta_t))}{\eta}<br>$$</p>
+<p>due to $F \geq 0$ </p>
+<p>$$<br>\sum^{t-1}_{i&#x3D;0}|\nabla F(\theta_i)|^2 \leq \frac{2F(\theta_0)}{\eta}<br>$$ </p>
+<p>$$<br>\sum^{t-1}_{i&#x3D;0}|\nabla F(\theta_i)|^2 \geq t \cdot min_{i \in (0, …,t-1)} | \nabla F(\theta_i)|^2<br>$$</p>
+<p>Then:</p>
+<p>$$<br>min_{i \in (0,…,T-1)}|\nabla F(\theta_i)|^2 \leq \frac{2F(\theta_0)}{\eta \cdot t}<br>$$</p>
+<h2 id="Stochastic-GD-SGD"><a href="#Stochastic-GD-SGD" class="headerlink" title="Stochastic GD(SGD)"></a>Stochastic GD(SGD)</h2><p>GD on ERM:<br>$$<br>\nabla_\theta \hat{L_n}[\theta] &#x3D; \frac{1}{\theta} \sum^n_{i&#x3D;1}[L(f_\theta(x_i), y_i)]<br>$$</p>
+<p>Computation complexity is $O(n)$</p>
+<p>Build a stochastic approx to $\nabla_\theta \hat{L_n}[\theta]$, that only takes $O(1)$ computation.</p>
+<p>$i_t \sim unif{1,…,n}$</p>
+<p>$g_t$ is gradient estimate<br>$$<br>g_t &#x3D; \nabla_\theta L(f_{\theta t}(x_{it}), y_{it})<br>$$</p>
+<p>$$<br>\mathbb{E}[g_t|i_1,….,i_{t-1}] &#x3D; \frac{1}{n} \sum^n_{i&#x3D;1} \nabla_\theta L(f_{\theta t}(x_i), y_i) &#x3D; \nabla_\theta \hat{L_n}[\theta_t]<br>$$</p>
+<h3 id="key-modifications-in-practise"><a href="#key-modifications-in-practise" class="headerlink" title="key modifications in practise"></a>key modifications in practise</h3><ol>
+<li>mini-batching</li>
+<li>epochs + reshuffling</li>
+</ol>
+<h2 id="step-size"><a href="#step-size" class="headerlink" title="step size"></a>step size</h2><p>GD: constant ($\eta &#x3D; 1&#x2F;2$) step size. <br>SGD: decaying step sizes(time-varying step size), <br>classical SGD theory: $\eta_t &#x3D; \frac{1}{\sqrt{t}}$, $\eta_t &#x3D; \frac{1}{t}$, </p>
+
         </div>
 
         
@@ -336,7 +345,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="https://shengwang.fun/2024/10/20/ML6/">https://shengwang.fun/2024/10/20/ML6/</a></span>
+                        <span><a href="https://shengwang.fun/2024/10/24/ML7/">https://shengwang.fun/2024/10/24/ML7/</a></span>
                     </p>
                 
                 
@@ -368,10 +377,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2024/10/24/ML7/">ML7</a>
+                <a class="prev" rel="prev" href="/2024/10/30/ML8/">ML8</a>
             
             
-            <a class="next" rel="next" href="/2024/10/20/ML5/">ML5</a>
+            <a class="next" rel="next" href="/2024/10/20/ML6/">ML6</a>
             
         </section>
 
