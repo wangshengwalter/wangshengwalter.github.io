@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sheng Wang">
+
+
+
+
+
+<title>ML11 | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/flask1.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
+    
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        
+<header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">ChengCheng&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+    <!-- url("https://unsplash.it/1228/880?image=302") -->
+    <!-- style="background-image: url(/image/backimg.jpg)" -->
+
+
+    
+
+    
+
+
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ChengCheng&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+
+    var posttitle_exist = function(){
+        var titletext = document.getElementById("text");
+        if(titletext == null) return;
+        
+        var textWidth = titletext.getComputedTextLength();
+        console.log(textWidth);
+        var pageWidth = window.innerWidth;
+        console.log(pageWidth);
+        if(textWidth > pageWidth){
+            document.getElementById("eff").style.display = "none";
+        }
+        else{
+            document.getElementById("eff").style.display = "block";
+        }
+    }
+    
+    window.onload = posttitle_exist;
+    window.onresize = posttitle_exist;
+</script>
+
+<div class="container">
+    
+        <aside class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</aside>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title" itemprop="name headline">ML11</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Sheng Wang</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">December 8, 2024&nbsp;&nbsp;11:15:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/ML/">ML</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Variation-inference-Variational-Autoencoders"><a href="#Variation-inference-Variational-Autoencoders" class="headerlink" title="Variation inference &amp; Variational Autoencoders"></a>Variation inference &amp; Variational Autoencoders</h1><p>$Z \sim P_\theta(Z)$ [Latent]<br>$X|Z \sim P_\theta(X|Z)$ [OBS model]</p>
+<p>Given $x_1, x_2,…,x_n$ and want to learn $\theta$.</p>
+<p>In general: $P(Z|X) &#x3D; \frac{P(Z,X)}{\int P(Z’,X)dZ’}$</p>
+<ul>
+<li><p>If $Z$ is finite<br>$\int P(Z’,X)dZ’ &#x3D; \sum_{Z’ \in [m]} P(Z’,X)$</p>
+</li>
+<li><p>If $Z$ is continous<br>This is a computational challenging!!!</p>
+</li>
+</ul>
+<p><strong>Ideal is direcly parameterize a posterior $q(Z|X)$ is place of the true posterior P(Z|X).!!</strong></p>
+<h2 id="Evidence-Lower-Bound-ELBO"><a href="#Evidence-Lower-Bound-ELBO" class="headerlink" title="Evidence Lower Bound(ELBO)"></a>Evidence Lower Bound(ELBO)</h2><p>$$<br>\begin{aligned}<br>logP_\theta(x) &amp;&#x3D; log \int P_\theta(z,x) dz \\<br>&amp;&#x3D; log \int P_\theta(x|z) P_\theta(z) dz \\<br>&amp;&#x3D; log \int \frac{P_\theta(x|z) P_\theta(z)}{q(z|x)} \cdot q(z|x)  dz \\<br>&amp;&#x3D; log \underset{q(z|x)}{\mathbb{E}} [\frac{P_\theta(x|z) P_\theta(z)}{q(z|x)}] dz \\<br>\end{aligned}<br>$$</p>
+<blockquote>
+<p>due to Jensons inequlity</p>
+</blockquote>
+<p>$$<br>\begin{aligned}<br>From \quad above &amp; \geq \underset{q(z|x)}{\mathbb{E}} log[\frac{P_\theta(x|z) P_\theta(z)}{q(z|x)}]\\<br>&amp; &#x3D; \underset{q(z|x)}{\mathbb{E}} log P_\theta(x|z) - \underset{q(z|x)}{\mathbb{E}}\left[log \frac{q(z|x)}{P_\theta(z)}\right]\\<br>&amp; &#x3D; \underset{q(z|x)}{\mathbb{E}} log P_\theta(x|z) - KL(q(z|x)||P_\theta(z)) \qquad \text{ELBO}\\<br>\end{aligned}<br>$$</p>
+<p><strong>Variational Inference(VI) population objective:</strong></p>
+<p>$$<br>\begin{aligned}<br>\underset{\theta}{max} \underset{P(X)}{\mathbb{E}} log P_\theta(X) &amp;\geq \underset{\theta , q(z|x)}{max} \underset{P(X)}{\mathbb{E}} \left[ \underset{q(z|x)}{\mathbb{E}} log P_\theta(x|z) - KL(q(z|x)||P_\theta(z)) \right] \\<br>&amp; \geq \underset{\theta , \phi}{max} \underset{P(X)}{\mathbb{E}} \left[ \underset{q_\phi(z|x)}{\mathbb{E}} log P_\theta(x|z) - KL(q_\phi(z|x)||P_\theta(z)) \right]<br>\end{aligned}<br>$$</p>
+<p>It’s hard to calculate $KL(q_\phi(z|x)||P_\theta(z))$<br>Let’s consider an Gaussion posteriors priors:<br>$$<br>q_\phi(z|x) &#x3D; N(e_{\mu,\phi}(x), e_{\Sigma,\phi}(x))<br>$$<br>$$<br>P_\theta(z) &#x3D; N(\mu_p, \Sigma_p)<br>$$</p>
+<p>Given $q_\phi(z|x)$ &amp; $P_\theta(z)$ as abive.<br>The $KL(q_\phi(z|x)||P_\theta(z))$ has a closed form!!</p>
+<p>$$<br>KL(q_\phi(z|x)||P_\theta(z)) &#x3D; \frac{1}{2} \left[ tr(\Sigma_p^{-1} \cdot e_{\Sigma, \phi}(x)) + |\mu_p - e_{\mu,\phi}(x)|_{\Sigma_p^-1}^2 -l + log [\frac{det \Sigma p}{det e_{\Sigma,\phi}(x)}] \right]<br>$$</p>
+<ul>
+<li>$l$ is dimension of the latent $z$</li>
+</ul>
+<h2 id="Computer-the-gradient-with-respect-of-phi"><a href="#Computer-the-gradient-with-respect-of-phi" class="headerlink" title="Computer the gradient with respect of $\phi$"></a>Computer the gradient with respect of $\phi$</h2><p>first simply function:<br>$$<br>F(\phi) &#x3D; \underset{q_\phi(z)}{\mathbb{E}} [f(z)]<br>$$</p>
+<p>$$<br>\hat{F_n}(\phi) &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^n [f(z_i)] \quad, \quad z_i \sim q_\phi(z)<br>$$</p>
+<p>Clearly, the expection of $\mathbb{E}[\hat{F}_n(\phi)] &#x3D; F(\phi)$</p>
+<p>But, the gradient:<br>$\nabla_\phi \hat{F}_n(\phi) &#x3D; 0$<br>due to in any auto-diff package???<br>The gradient is 0 is not learnable, thus, we need to use <strong>Reparameterization Trick</strong>!! </p>
+<p>Let’s assume that $q_\phi(z) &#x3D; N(\mu_\phi, \Sigma_\phi)$<br>$$<br>Z &#x3D;;(equal , dist); \left[ \mu_\phi+ \Sigma_\phi^{1&#x2F;2} \cdot g \right] \quad Z \sim q_\phi(z), , g \sim N(0,I)<br>$$<br>Then the equation change!!<br>$$<br>F(\phi) &#x3D; \underset{q_\phi(z)}{\mathbb{E}} [f(z)]&#x3D;\underset{g \sim N(0,I)}{\mathbb{E}} \left[ f(\mu_\phi+ \Sigma_\phi^{1&#x2F;2} \cdot g) \right]<br>$$</p>
+<p>$$<br>\hat{F_n}(\phi) &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^n [f(\mu_\phi+ \Sigma_\phi^{1&#x2F;2} \cdot g)] \quad, \quad g_i \sim N(0,I)<br>$$</p>
+<p>Then:<br>$$\mathbb{E}[\hat{F}_n(\phi)] &#x3D; F(\phi)$$<br>$$\mathbb{E}[\nabla_\phi \hat{F}_n(\phi)] &#x3D; \nabla_\phi F(\phi)$$</p>
+<h2 id="Finite-Sample-VI-objective"><a href="#Finite-Sample-VI-objective" class="headerlink" title="Finite Sample VI objective"></a>Finite Sample VI objective</h2><p>Given $x_1, x_2,…,x_n$ and want to learn $\theta$.<br>Draw $g_1,…,g_n \sim N(0,I)$<br>$$<br>\underset{\theta , \phi}{max} \hat{L}n(\theta, \phi) &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^n \left[ logP_\theta(x_i|z&#x3D;e_{\mu,\phi}(x_i)+e_{\Sigma,\phi}^{1&#x2F;2}(x_i) \cdot g_i) -KL(g_\phi(z|x_i) || P_\theta(z))\right]<br>$$</p>
+<p>For avove equation, we can run gradient ascent method on $\hat{L}n(\theta, \phi)$</p>
+<p>Go back to see the whole process:<br>$$<br>data \underset{encode}{\to} Latent , space \underset{decode}{\to} new , data<br>$$</p>
+<ul>
+<li>decode use $q_\phi(z|x)$</li>
+<li>encode use $p_\theta(x|z)$</li>
+</ul>
+<h3 id="Reconstruction-loss"><a href="#Reconstruction-loss" class="headerlink" title="Reconstruction loss"></a>Reconstruction loss</h3><p>Suppose $p_\theta(x|z) &#x3D; N(d_{\mu, \theta}(z), d_{\Sigma, \theta}(z))$</p>
+<p>$$<br>log p_\theta(x|z) &#x3D; -\frac{1}{2}|x-d_{\mu, \theta}(z)|^2-\frac{1}{2}log((2\pi)^d)-\frac{1}{2}logdetd_{\Sigma, \theta}(z)<br>$$</p>
+<blockquote>
+<p>$z &#x3D; e_{\mu,\phi}(x)+e_{\Sigma,\phi}^{1&#x2F;2}(x) \cdot g$<br>$z$ is new data</p>
+</blockquote>
+<p>Thus,<br>$$<br>-\frac{1}{2}|x-d_{\mu, \theta}(z)|^2 &#x3D; -\frac{1}{2}|x-d_{\mu, \theta}(e_{\mu,\phi}(x)+e_{\Sigma,\phi}^{1&#x2F;2}(x) \cdot g)|^2<br>$$</p>
+<ul>
+<li>$x-d_{\mu, \theta}(z)$ is decoder error</li>
+<li>$e_{\mu,\phi}(x)+e_{\Sigma,\phi}^{1&#x2F;2}(x) \cdot g)$ is the result of encoder</li>
+<li>translation is decoder error based on encoder</li>
+<li>The total equation is reconstruction error!!</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Sheng Wang</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://shengwang.fun/2024/12/08/ML11/">https://shengwang.fun/2024/12/08/ML11/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/ML/"># ML</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2024/12/09/ML12_DM_sum/">ML12 Generative Model Mid Sum</a>
+            
+            
+            <a class="next" rel="next" href="/2024/12/08/ML10/">ML10</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Sheng Wang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+
+    </div>
+</body>
+
+</html>
