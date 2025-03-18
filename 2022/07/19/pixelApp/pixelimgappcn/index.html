@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sheng Wang">
+
+
+
+
+
+<title>图片像素化中文简介 | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/flask1.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        
+<header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">ChengCheng&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+    <!-- url("https://unsplash.it/1228/880?image=302") -->
+    <!-- style="background-image: url(/image/backimg.jpg)" -->
+
+
+    
+
+    
+
+
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ChengCheng&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+
+    var posttitle_exist = function(){
+        var titletext = document.getElementById("text");
+        if(titletext == null) return;
+        
+        var textWidth = titletext.getComputedTextLength();
+        console.log(textWidth);
+        var pageWidth = window.innerWidth;
+        console.log(pageWidth);
+        if(textWidth > pageWidth){
+            document.getElementById("eff").style.display = "none";
+        }
+        else{
+            document.getElementById("eff").style.display = "block";
+        }
+    }
+    
+    window.onload = posttitle_exist;
+    window.onresize = posttitle_exist;
+</script>
+
+<div class="container">
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title" itemprop="name headline">图片像素化中文简介</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Sheng Wang</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">July 19, 2022&nbsp;&nbsp;4:29:00</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>本软件提供四种基本功能。图片压缩，图片像素画，图片颜色综合和图片分割再拼接。</p>
+<ol>
+<li>图片压缩功能提供两种不同的方法，分别是采样发和二项采样发。具体原理可以参考一下网址。</li>
+<li>图片像素化功能将通过用户提供的区块大小对图片进行像素化。基本原理是将图片分成正方形的区块并取这个区块最多的颜色作为整个区块的颜色。需要注意的是有两点：第一，是取这个区块最多的颜色而不是这个区块的平均值。第二，像素化不会改变您提供图片的“清晰度”，及图片长宽占的像素数量不变。并没有将整个区块的像素变成一个像素，只是把整个区块的像素都变成了同一种颜色。</li>
+<li>颜色综合功能是获取您输入的颜色相似度（颜色的间距来反映颜色的相似程度）。这个功能将搜索整个图片中的像素点分成不同的组，保证每个组中的像素点的颜色之间的间距都在这个范围之内。再通过计算这个组所有像素的平均颜色来确定这个组的所有像素点应该改成什么颜色。<br>之后会开发新功能，及让用户选择需要的颜色，再从图片中找和需要颜色相近的像素点。因为现在碰到的问题是，程序是随机选择基准像素的，并没有选择这幅画的主要颜色来找像素组。比如说用户给一张的图片。你知道假如要画一个“火”的像素化，你一定会选择红，橙，黄这三种颜色来做主题颜色。但是目前算法只会随机算则基准值，如果算法选择橙色作为颜色基准值，则将会筛选和橙色距离近的颜色，比如红色和黄色，那么像素画则不会生动形象。如果调小范围则会出现图片没有什么改变的问题。</li>
+<li>图片的剪切再重组。通过输入区块大小，x间距和y间距来截取图片的一部分，再重新组合成一个新的图片。下面是具体的原理图。</li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Sheng Wang</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://shengwang.fun/2022/07/19/pixelApp/pixelimgappcn/">https://shengwang.fun/2022/07/19/pixelApp/pixelimgappcn/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/07/22/GoogleApi/googledriveapi/">JAVA使用Google drive的API服务</a>
+            
+            
+            <a class="next" rel="next" href="/2022/07/15/pixelApp/pixelimgappen/">Privacy policy of Pixlate Image</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Sheng Wang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+
+    </div>
+</body>
+
+</html>

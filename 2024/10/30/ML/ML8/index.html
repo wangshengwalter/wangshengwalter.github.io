@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sheng Wang">
+
+
+
+
+
+<title>ML8 | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/flask1.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
+    
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        
+<header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">ChengCheng&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+    <!-- url("https://unsplash.it/1228/880?image=302") -->
+    <!-- style="background-image: url(/image/backimg.jpg)" -->
+
+
+    
+
+    
+
+
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ChengCheng&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+
+    var posttitle_exist = function(){
+        var titletext = document.getElementById("text");
+        if(titletext == null) return;
+        
+        var textWidth = titletext.getComputedTextLength();
+        console.log(textWidth);
+        var pageWidth = window.innerWidth;
+        console.log(pageWidth);
+        if(textWidth > pageWidth){
+            document.getElementById("eff").style.display = "none";
+        }
+        else{
+            document.getElementById("eff").style.display = "block";
+        }
+    }
+    
+    window.onload = posttitle_exist;
+    window.onresize = posttitle_exist;
+</script>
+
+<div class="container">
+    
+        <aside class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</aside>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title" itemprop="name headline">ML8</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Sheng Wang</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">October 30, 2024&nbsp;&nbsp;16:17:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/ML/">ML</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Unsupervised-Learning"><a href="#Unsupervised-Learning" class="headerlink" title="Unsupervised Learning"></a>Unsupervised Learning</h1><p>Set up observe data $x_1,…,x_n \in \mathbb{R}^d$ <br>$x_i \sim D$ <br>No labels $y_1,…y_n$</p>
+<ol>
+<li>Representation statistics <br>a. principle component analysis (PCA) <br>b. covariance estimation</li>
+<li>clustering <br>a. k-mean clustering <br>b. expectation-maximitation</li>
+<li>Density estimation(learn the density $p(x)$ of $\mathbb{D}$)</li>
+<li>sampling&#x2F;novel example generation <br>a. how to sample novel instance from $\mathbb{D}$</li>
+</ol>
+<ul>
+<li>Not a complete list for unsupervised learning</li>
+</ul>
+<h1 id="Energy-Based-Models-EBM"><a href="#Energy-Based-Models-EBM" class="headerlink" title="Energy Based Models(EBM)"></a>Energy Based Models(EBM)</h1><p>An algorithm to learn a data sampler.</p>
+<p>Input:  </p>
+<ul>
+<li>$x_1,…,x_n \sim \mathbb{D}$</li>
+</ul>
+<p>Output: </p>
+<ul>
+<li>$\hat{\mathbb{D}}$ that we can sample from $dist(\mathbb{D}, \hat{\mathbb{D}})$ is small.</li>
+</ul>
+<p>Key ideal:</p>
+<ul>
+<li>forgot about learning the density exactly</li>
+<li>only learn up to normalization</li>
+</ul>
+<p>$$<br>P_\theta(x) \propto exp(f_\theta(x))<br>$$</p>
+<p>We know that $\int P_\theta(x) dx &#x3D; 1 &#x3D; c\int exp(f_\theta(x))dx$ <br>Now $c&#x3D;\frac{1}{\int exp(f_\theta(x))dx}$</p>
+<h2 id="learning-EBM"><a href="#learning-EBM" class="headerlink" title="learning EBM"></a>learning EBM</h2><p>we need a loss function</p>
+<ul>
+<li>principle of the maximum likehood estimation</li>
+</ul>
+<p>pick $\theta$ to maximize<br>$$<br>L[\theta] &#x3D; \underset{x \sim D}{\mathbb{E}}[logP_\theta(x)]<br>$$<br>$P_\theta(x) &#x3D; \frac{exp(f_\theta(x))}{Z[\theta]}$, $Z[\theta] &#x3D; \int exp(f_\theta(x))dx$</p>
+<p>What does Maximum likelihood (MLE)optimize for?<br>Define: <br>$KL(p,q) &#x3D; \underset{x \sim p}{\mathbb{E}} [log \frac{p(x)}{q(x)}]$ <br>(kullback-lieber divergence)</p>
+<ul>
+<li>KL-div is not a true metric on probability distributions!<br>$(KL(p,q) \neq KL(q,p))$</li>
+<li>but $KL(p,q)&#x3D;0 \Leftrightarrow p&#x3D;q$</li>
+</ul>
+<p>Thus, the framework of max likelihood estimation is actually learning a distribution that minimizes this KL divergence.</p>
+<h3 id="max-likelihood-minimize-KL-divergence"><a href="#max-likelihood-minimize-KL-divergence" class="headerlink" title="max likelihood-&gt;minimize KL-divergence"></a>max likelihood-&gt;minimize KL-divergence</h3><p>$$KL(P_{true}, \hat{P}) &#x3D; \underset{x \sim P_{true}}{\mathbb{E}} log(\frac{P_{true}{x}}{\hat{P}(x)})$$</p>
+<p>$$&#x3D; \underset{x \sim P_{true}}{\mathbb{E}} log(P_{true}{x}) - \underset{x \sim P_{true}}{\mathbb{E}} log(\hat{P}(x))$$</p>
+<p>Now, we need to minimize KL-div:<br>$$<br>\begin{aligned}<br>\underset{\hat{p}}{argmin} KL(P_{true}, \hat{P}) &amp;&#x3D; \underset{\hat{p}}{argmin} [-\underset{x \sim P_{true}}{\mathbb{E}} log(\hat{P}(x))] \\<br>&amp;&#x3D; \underset{\hat{p}}{argmax} [\underset{x \sim P_{true}}{\mathbb{E}} log(\hat{P}(x))] \\<br>&amp;&#x3D; MLE estimator<br>\end{aligned}<br>$$</p>
+<p>why is $P_{true}$ first in the KL? (remember: KL-div is not a true metric on probability distributions)<br>$$<br>\begin{aligned}<br>\underset{\hat{p}}{argmin} KL(\hat{P}, P_{true}) &amp;&#x3D; \underset{x \sim P_{true}}{\mathbb{E}} log(\frac{\hat{P}(x)}{P_{true}{x}}) \\<br>&amp; &#x3D; \underset{x \sim P_{true}}{\mathbb{E}} log(\hat{P}(x))-\underset{x \sim P_{true}}{\mathbb{E}} log(P_{true}{x}) \\<br>&amp;&#x3D; \underset{\hat{p}}{argmin} [-\underset{x \sim P_{true}}{\mathbb{E}} log(P_{true}{x})] \\<br>&amp;&#x3D; \underset{\hat{p}}{argmax} [\underset{x \sim P_{true}}{\mathbb{E}} log(P_{true}{x})] \\<br>\end{aligned}<br>$$</p>
+<h3 id="Back-to-train-maximize"><a href="#Back-to-train-maximize" class="headerlink" title="Back to train (maximize)"></a>Back to train (maximize)</h3><p>$$<br>L[\theta] &#x3D; \underset{x \sim D}{\mathbb{E}}[logP_\theta(x)]<br>$$<br>$P_\theta(x) &#x3D; \frac{exp(f_\theta(x))}{Z[\theta]}$, $Z[\theta] &#x3D; \int exp(f_\theta(x))dx$</p>
+<p>we can use gradients, but $Z[\theta]$ will disappear.</p>
+<p>$$<br>\begin{aligned}<br>\nabla_\theta L[\theta] &amp;&#x3D; \nabla_\theta \underset{x \sim D}{\mathbb{E}}[logP_\theta(x)] \\<br>&amp;&#x3D; \nabla_\theta \underset{x \sim D}{\mathbb{E}}[log(exp(f_\theta(x)))-log(Z[\theta])] \\<br>&amp;&#x3D; \nabla_\theta \underset{x \sim D}{\mathbb{E}}[f_\theta(x)-log(Z[\theta])] \\<br>&amp;&#x3D; \underset{x \sim D}{\mathbb{E}}[\nabla_\theta f_\theta(x)-\nabla_\theta log(Z[\theta])] \\<br>&amp;&#x3D; \underset{x \sim D}{\mathbb{E}}[\nabla_\theta f_\theta(x)-\nabla_\theta log(Z[\theta])] \\<br>\end{aligned}<br>$$</p>
+<p>We meet problem in how to compute: $\nabla_\theta log(Z[\theta])$<br>$$<br>\nabla_\theta log(Z[\theta]) &#x3D; \frac{1}{Z[\theta]} \nabla_\theta Z[\theta]<br>$$<br>use the definite of $Z[\theta] &#x3D; \int exp(f_\theta(x))dx$<br>$$<br>\nabla_\theta log(Z[\theta]) &#x3D; \frac{1}{Z[\theta]} \nabla_\theta \int exp(f_\theta(x))dx<br>$$<br>$$<br>\nabla_\theta log(Z[\theta]) &#x3D; \frac{1}{Z[\theta]} \int \nabla_\theta exp(f_\theta(x))dx<br>$$<br>$$<br>\nabla_\theta log(Z[\theta]) &#x3D; \frac{1}{Z[\theta]} \int exp(f_\theta(x)) \cdot \nabla_\theta f_\theta(x) dx<br>$$<br>$$<br>\nabla_\theta log(Z[\theta]) &#x3D; \int \frac{exp(f_\theta(x))}{Z[\theta]} \cdot \nabla_\theta f_\theta(x) dx<br>$$<br>use the definite of $P_\theta(x) &#x3D; \frac{exp(f_\theta(x))}{Z[\theta]}$<br>$$<br>\nabla_\theta log(Z[\theta]) &#x3D; \int P_\theta(x) \cdot \nabla_\theta f_\theta(x) dx<br>$$<br>$$<br>\nabla_\theta log(Z[\theta]) &#x3D;  \underset{x \sim P_\theta}{\mathbb{E}}[\nabla_\theta f_\theta(x)]<br>$$</p>
+<p>plugin back to $\nabla_\theta L[\theta]$<br>$$<br>\begin{aligned}<br>\nabla_\theta L[\theta] &amp;&#x3D;  \underset{x \sim D}{\mathbb{E}}[\nabla_\theta f_\theta(x)] - \underset{x \sim D}{\mathbb{E}}[\underset{x \sim P_\theta}{\mathbb{E}}[\nabla_\theta f_\theta(x)]]\\<br>&amp;&#x3D;  \underset{x \sim D}{\mathbb{E}}[\nabla_\theta f_\theta(x)] - \underset{x \sim P_\theta}{\mathbb{E}}[\nabla_\theta f_\theta(x)]\\<br>\end{aligned}<br>$$</p>
+<ul>
+<li>the first is true data dist</li>
+<li>the second is current EBM model</li>
+</ul>
+<p>Thus, if these two distribution is similar or even same, the gradient should be similar to zero.</p>
+<p>Define a finite sample gradient:<br>$$<br>\nabla_\theta \hat{L_n}[\theta] &#x3D; \frac{1}{n} \sum^n_{i&#x3D;1} \nabla_\theta f_\theta(x_i) - \frac{1}{n} \sum^n_{i&#x3D;1} \nabla_\theta f_\theta(\bar{x_i})<br>$$</p>
+<ul>
+<li>$x_1, …. x_n \sim \mathbb{D}$, come from finite true data set</li>
+<li>$\bar{x_1}, …. \bar{x_n} \sim P_\theta(.)$, come from model</li>
+</ul>
+<h2 id="Sampling-from-P-theta"><a href="#Sampling-from-P-theta" class="headerlink" title="Sampling from $P_\theta(.)$"></a>Sampling from $P_\theta(.)$</h2><p>How does one draw samples from $P_\theta(.)$?</p>
+<p>If $X$ is discrate, this is trivral.<br>Compute $P_\theta(1), …., P_\theta(n)$<br>Sample weighted dist ${P_\theta(i)}^n_{i&#x3D;1}$</p>
+<p>If $X&#x3D;\mathbb{R}^d$, then what?<br>use <strong>Langevin sample</strong></p>
+<h3 id="Langevin-sample"><a href="#Langevin-sample" class="headerlink" title="Langevin sample"></a>Langevin sample</h3><p>Construct a process ${Z_t}^T_{t&#x3D;0}$<br>$$<br>Z_{t+1} &#x3D; Z_t + \eta \nabla_x log p_\theta(Z_t) + \sqrt{2\eta} \cdot W_t<br>$$</p>
+<ul>
+<li>$W_t \sim N(0, \mathbb{R}^d)$, which is a random gaussion vector</li>
+<li>$\eta \gt 0$, is the step size</li>
+<li>$Z_0 &#x3D; 0$, whatever</li>
+</ul>
+<p>$log p_\theta(x) &#x3D; f_\theta(x)-logZ[\theta]$<br>If we want to compute $\nabla_x log p_\theta(x)$<br>remeber that $logZ[\theta]$ is not dependent on $x$<br>Thus,<br>$\nabla_x log p_\theta(x) &#x3D; \nabla_x f_\theta(x)$</p>
+<p>output: $Z_t$</p>
+<h4 id="calculate-for-Discrate-EBMs"><a href="#calculate-for-Discrate-EBMs" class="headerlink" title="calculate for Discrate EBMs"></a>calculate for Discrate EBMs</h4><p>$X &#x3D; [m]$<br>$P_\theta(x&#x3D;i) \propto exp(\theta_t)$, $i \leftarrow [m]$.<br>$$<br>P_\theta(x&#x3D;i) &#x3D; \frac{exp(\theta_i)}{\sum^m_{j&#x3D;1} exp(\theta_j)}<br>$$</p>
+<p>why brother? Let’s just parameterize $P_\theta(x&#x3D;i) &#x3D; p_i$</p>
+<ul>
+<li>$\sum^m_{i&#x3D;1} p_i &#x3D; 1$</li>
+<li>$_i \geq 0$, $\forall i \in [m]$</li>
+</ul>
+<p>Computing Gradient $\nabla_\theta L[\theta]$ under discrate EBMs:<br>$$<br>\nabla_\theta L[\theta] &#x3D; p_*-p_\theta<br>$$</p>
+<ul>
+<li>$p_*$ is the true dist, $p_* \in \mathbb{R}^m$</li>
+<li>$p_\theta \in \mathbb{R}^m$, which $P_\theta(x&#x3D;i) &#x3D; \frac{exp(\theta_i)}{\sum^m_{j&#x3D;1} exp(\theta_j)}$</li>
+</ul>
+<p>look at Gradient ascent:<br>$\theta_{t+1} &#x3D; \theta_t + \eta \nabla_\theta L[\theta_t]$<br>$$<br>P_{\theta_{t+1}}(i) &#x3D; \frac{P_{\theta_t}(i) \cdot exp(\eta \nabla_t(i))}{\sum^m_{j&#x3D;1}P_{\theta_t}(i) \cdot exp(\eta \nabla_t(i))}<br>$$</p>
+<p>$\nabla_t &#x3D; P_*-P_\theta$</p>
+<p>Now go to calculate:<br>$$<br>\begin{aligned}<br>\nabla_\theta L[\theta] &amp;&#x3D;  \underset{x \sim P_{true}}{\mathbb{E}}[\nabla_\theta f_\theta(x)] - \underset{x \sim P_\theta}{\mathbb{E}}[\nabla_\theta f_\theta(x)]\\<br>&amp;&#x3D;\underset{i \sim P_*}{\mathbb{E}}[e_i]\\<br>&amp;&#x3D;P_i<br>\end{aligned}<br>$$</p>
+<ul>
+<li>$P_\theta(i) \propto exp(\theta_i)$</li>
+<li>$\nabla f_\theta(x&#x3D;i) &#x3D; \nabla_\theta \theta_i &#x3D; e_i$</li>
+</ul>
+<h4 id="Calculate-for-EBMs-on-Gaussion"><a href="#Calculate-for-EBMs-on-Gaussion" class="headerlink" title="Calculate for EBMs on Gaussion"></a>Calculate for EBMs on Gaussion</h4><p>Assume that $P_{true} &#x3D; N(\mu, I)$<br>$P_{true} &#x3D; \frac{exp(f_\theta(x))}{Z[\theta]}$<br>$f_\theta(x) &#x3D; -\frac{1}{2} |X-\mu|^2$<br>$\theta &#x3D; \mu$ recovers $P_{true}$</p>
+<p>$F&#x3D;{f_\theta(x) &#x3D; -\frac{1}{2} |X-\mu|^2 | \theta \in \mathbb{R}^d}$</p>
+<p>$\nabla_\theta f_\theta(x) &#x3D; x-\theta$</p>
+<p>Now go to calculate:<br>$$<br>\begin{aligned}<br>\nabla_\theta L[\theta] &amp;&#x3D;  \underset{x \sim P_{true}}{\mathbb{E}}[\nabla_\theta f_\theta(x)] - \underset{x \sim P_\theta}{\mathbb{E}}[\nabla_\theta f_\theta(x)]\\<br>&amp; &#x3D; \underset{x \sim P_{true}}{\mathbb{E}}[x-\theta]-\underset{x \sim P_\theta}{\mathbb{E}}[x-\theta]\\<br>&amp;&#x3D;\mu - \theta<br>\end{aligned}<br>$$</p>
+<ul>
+<li>The second term is zero?</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Sheng Wang</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://shengwang.fun/2024/10/30/ML/ML8/">https://shengwang.fun/2024/10/30/ML/ML8/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/ML/"># ML</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2024/11/21/Conda/conda/">Conda Command</a>
+            
+            
+            <a class="next" rel="next" href="/2024/10/24/ML/ML7/">ML7</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Sheng Wang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+
+    </div>
+</body>
+
+</html>

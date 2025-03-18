@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Sheng Wang">
+
+
+
+
+
+<title>Markdown Math Format | Hexo</title>
+
+
+
+    <link rel="icon" href="/image/flask1.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
+    
+
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        
+<header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">ChengCheng&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+    <!-- url("https://unsplash.it/1228/880?image=302") -->
+    <!-- style="background-image: url(/image/backimg.jpg)" -->
+
+
+    
+
+    
+
+
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">ChengCheng&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+
+    var posttitle_exist = function(){
+        var titletext = document.getElementById("text");
+        if(titletext == null) return;
+        
+        var textWidth = titletext.getComputedTextLength();
+        console.log(textWidth);
+        var pageWidth = window.innerWidth;
+        console.log(pageWidth);
+        if(textWidth > pageWidth){
+            document.getElementById("eff").style.display = "none";
+        }
+        else{
+            document.getElementById("eff").style.display = "block";
+        }
+    }
+    
+    window.onload = posttitle_exist;
+    window.onresize = posttitle_exist;
+</script>
+
+<div class="container">
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title" itemprop="name headline">Markdown Math Format</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Sheng Wang</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">October 20, 2024&nbsp;&nbsp;3:57:00</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <table>
+<thead>
+<tr>
+<th>code</th>
+<th>FIELD2</th>
+<th>FIELD3</th>
+<th>$\quad$</th>
+<th>code</th>
+<th>FIELD6</th>
+<th>FIELD7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\mathbb{X}</td>
+<td></td>
+<td>$\mathbb{X}$</td>
+<td>$\quad$</td>
+<td>\alpha</td>
+<td>Alpha</td>
+<td>α</td>
+</tr>
+<tr>
+<td>\frac{1}{n}</td>
+<td></td>
+<td>$\frac{1}{n}$</td>
+<td>$\quad$</td>
+<td>\beta</td>
+<td>Beta</td>
+<td>β</td>
+</tr>
+<tr>
+<td>\bigcup_{i&#x3D;1}^n</td>
+<td></td>
+<td>$\bigcup_{i&#x3D;1}^n$</td>
+<td>$\quad$</td>
+<td>\gamma</td>
+<td>Gamma</td>
+<td>γ</td>
+</tr>
+<tr>
+<td>\sum_{i&#x3D;1}^n</td>
+<td></td>
+<td>$\sum_{i&#x3D;1}^n$</td>
+<td>$\quad$</td>
+<td>\delta</td>
+<td>Delta</td>
+<td>δ</td>
+</tr>
+<tr>
+<td>\sqrt[4]{81}</td>
+<td></td>
+<td>$\sqrt[4]{81}$</td>
+<td>$\quad$</td>
+<td>\epsilon</td>
+<td>Epsilon</td>
+<td>ϵ</td>
+</tr>
+<tr>
+<td>\lim_{x \to \infty}</td>
+<td></td>
+<td>$\lim_{x \to \infty}$</td>
+<td>$\quad$</td>
+<td>\zeta</td>
+<td>Zeta</td>
+<td>ζ</td>
+</tr>
+<tr>
+<td>\underset{\text{below}}{\xrightarrow{\text{above}}}</td>
+<td></td>
+<td>$\underset{\text{below}}{\xrightarrow{\text{above}}}$</td>
+<td>$\quad$</td>
+<td>\eta</td>
+<td>Eta</td>
+<td>η</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>$\quad$</td>
+<td>\theta</td>
+<td>Theta</td>
+<td>θ</td>
+</tr>
+<tr>
+<td>\lvert x \rvert</td>
+<td></td>
+<td>$\lvert x \rvert$</td>
+<td>$\quad$</td>
+<td>\iota</td>
+<td>Iota</td>
+<td>ι</td>
+</tr>
+<tr>
+<td>\langle x \rangle</td>
+<td></td>
+<td>$\langle x \rangle$</td>
+<td>$\quad$</td>
+<td>\kappa</td>
+<td>Kappa</td>
+<td>κ</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>$\quad$</td>
+<td>\lambda</td>
+<td>Lambda</td>
+<td>λ</td>
+</tr>
+<tr>
+<td>\neq</td>
+<td>not equal</td>
+<td>$\neq$</td>
+<td>$\quad$</td>
+<td>\mu</td>
+<td>Mu</td>
+<td>μ</td>
+</tr>
+<tr>
+<td>\leq</td>
+<td>less than or equal to</td>
+<td>$\leq$</td>
+<td>$\quad$</td>
+<td>\nu</td>
+<td>Nu</td>
+<td>ν</td>
+</tr>
+<tr>
+<td>\geq</td>
+<td>greater than or equal to</td>
+<td>$\geq$</td>
+<td>$\quad$</td>
+<td>\xi</td>
+<td>Xi</td>
+<td>ξ</td>
+</tr>
+<tr>
+<td>\lt</td>
+<td>less than</td>
+<td>$\lt$</td>
+<td>$\quad$</td>
+<td>o</td>
+<td>Omicron</td>
+<td>o</td>
+</tr>
+<tr>
+<td>\gt</td>
+<td>greater than</td>
+<td>$\gt$</td>
+<td>$\quad$</td>
+<td>\pi</td>
+<td>Pi</td>
+<td>π</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>$\quad$</td>
+<td>\rho</td>
+<td>Rho</td>
+<td>ρ</td>
+</tr>
+<tr>
+<td>\infty</td>
+<td></td>
+<td>$\infty$</td>
+<td>$\quad$</td>
+<td>\sigma</td>
+<td>Sigma</td>
+<td>σ</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>$\quad$</td>
+<td>\tau</td>
+<td>Tau</td>
+<td>τ</td>
+</tr>
+<tr>
+<td>\perp</td>
+<td>independent</td>
+<td>$\perp$</td>
+<td>$\quad$</td>
+<td>\upsilon</td>
+<td>Upsilon</td>
+<td>υ</td>
+</tr>
+<tr>
+<td>\in</td>
+<td></td>
+<td>$\in$</td>
+<td>$\quad$</td>
+<td>\phi</td>
+<td>Phi</td>
+<td>ϕ</td>
+</tr>
+<tr>
+<td>\notin</td>
+<td></td>
+<td>$\notin$</td>
+<td>$\quad$</td>
+<td>\chi</td>
+<td>Chi</td>
+<td>χ</td>
+</tr>
+<tr>
+<td>\subset</td>
+<td></td>
+<td>$\subset$</td>
+<td>$\quad$</td>
+<td>\psi</td>
+<td>Psi</td>
+<td>ψ</td>
+</tr>
+<tr>
+<td>\supset</td>
+<td></td>
+<td>$\supset$</td>
+<td>$\quad$</td>
+<td>\omega</td>
+<td>Omega</td>
+<td>ω</td>
+</tr>
+<tr>
+<td>\cup</td>
+<td></td>
+<td>$\cup$</td>
+<td>$\quad$</td>
+<td>A</td>
+<td>Alpha</td>
+<td>A</td>
+</tr>
+<tr>
+<td>\sim</td>
+<td>~</td>
+<td>$\sim$</td>
+<td>$\quad$</td>
+<td>B</td>
+<td>Beta</td>
+<td>B</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>$\quad$</td>
+<td>\Gamma</td>
+<td>Gamma</td>
+<td>Γ</td>
+</tr>
+<tr>
+<td>\quad</td>
+<td>Large Space</td>
+<td>$\quad$</td>
+<td>$\quad$</td>
+<td>\Delta</td>
+<td>Delta</td>
+<td>Δ</td>
+</tr>
+<tr>
+<td>\qquad</td>
+<td>Extra Large Spac</td>
+<td>$\qquad$</td>
+<td>$\quad$</td>
+<td>E</td>
+<td>Epsilon</td>
+<td>E</td>
+</tr>
+<tr>
+<td>,</td>
+<td>Small Space</td>
+<td>$,$</td>
+<td>$\quad$</td>
+<td>Z</td>
+<td>Zeta</td>
+<td>Z</td>
+</tr>
+<tr>
+<td>;</td>
+<td>Medium Space</td>
+<td>$;$</td>
+<td>$\quad$</td>
+<td>H</td>
+<td>Eta</td>
+<td>H</td>
+</tr>
+<tr>
+<td>\text{Xxxx}</td>
+<td></td>
+<td>$\text{xxxx}$</td>
+<td>$\quad$</td>
+<td>\Theta</td>
+<td>Theta</td>
+<td>Θ</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>$\quad$</td>
+<td>I</td>
+<td>Iota</td>
+<td>I</td>
+</tr>
+<tr>
+<td>\hat{L}</td>
+<td>^</td>
+<td>$\hat{L}$</td>
+<td>$\quad$</td>
+<td>K</td>
+<td>Kappa</td>
+<td>K</td>
+</tr>
+<tr>
+<td>\tilde{x}</td>
+<td>~</td>
+<td>$\tilde{x}$</td>
+<td>$\quad$</td>
+<td>\Lambda</td>
+<td>Lambda</td>
+<td>Λ</td>
+</tr>
+<tr>
+<td>\bar{x}</td>
+<td>-</td>
+<td>$\bar{x}$</td>
+<td>$\quad$</td>
+<td>M</td>
+<td>Mu</td>
+<td>M</td>
+</tr>
+<tr>
+<td>\overline{x+y}</td>
+<td>_</td>
+<td>$\overline{x+y}$</td>
+<td>$\quad$</td>
+<td>N</td>
+<td>Nu</td>
+<td>N</td>
+</tr>
+<tr>
+<td>\dot{x}</td>
+<td>.</td>
+<td>$\dot{x}$</td>
+<td>$\quad$</td>
+<td>\Xi</td>
+<td>Xi</td>
+<td>Ξ</td>
+</tr>
+<tr>
+<td>\ddot{x}</td>
+<td>..</td>
+<td>$\ddot{x}$</td>
+<td>$\quad$</td>
+<td>O</td>
+<td>Omicron</td>
+<td>O</td>
+</tr>
+<tr>
+<td>\check{x}</td>
+<td>ˇ</td>
+<td>$\check{x}$</td>
+<td>$\quad$</td>
+<td>\Pi</td>
+<td>Pi</td>
+<td>Π</td>
+</tr>
+<tr>
+<td>\breve{x}</td>
+<td>˘</td>
+<td>$\breve{x}$</td>
+<td>$\quad$</td>
+<td>P</td>
+<td>Rho</td>
+<td>P</td>
+</tr>
+<tr>
+<td>\acute{x}</td>
+<td>ˊ</td>
+<td>$\acute{x}$</td>
+<td>$\quad$</td>
+<td>\Sigma</td>
+<td>Sigma</td>
+<td>Σ</td>
+</tr>
+<tr>
+<td>\grave{x}</td>
+<td>ˋ</td>
+<td>$\grave{x}$</td>
+<td>$\quad$</td>
+<td>T</td>
+<td>Tau</td>
+<td>T</td>
+</tr>
+<tr>
+<td>\vec{x}</td>
+<td>⃗</td>
+<td>$\vec{x}$</td>
+<td>$\quad$</td>
+<td>Y</td>
+<td>Upsilon</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>\cdot</td>
+<td>.</td>
+<td>$\cdot$</td>
+<td>$\quad$</td>
+<td>\Phi</td>
+<td>Phi</td>
+<td>Φ</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>$\quad$</td>
+<td>X</td>
+<td>Chi</td>
+<td>X</td>
+</tr>
+<tr>
+<td>\to</td>
+<td>Right arrow (standard)</td>
+<td>$\to$</td>
+<td>$\quad$</td>
+<td>\Psi</td>
+<td>Psi</td>
+<td>Ψ</td>
+</tr>
+<tr>
+<td>\sim</td>
+<td>Similar to (used for approximation)</td>
+<td>$\sim$</td>
+<td>$\quad$</td>
+<td>\Omega</td>
+<td>Omega</td>
+<td>Ω</td>
+</tr>
+<tr>
+<td>\leadsto</td>
+<td>Leads to (used for weak implication)</td>
+<td>$\leadsto$</td>
+<td>$\quad$</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>\rightsquigarrow</td>
+<td>Squiggly right arrow (approximation or convergence)</td>
+<td>$\rightsquigarrow$</td>
+<td>$\quad$</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>\approx</td>
+<td>Approximately equal</td>
+<td>$\approx$</td>
+<td>$\quad$</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>\uparrow</td>
+<td></td>
+<td>$\uparrow$</td>
+<td>$\quad$</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>\downarrow</td>
+<td></td>
+<td>$\downarrow$</td>
+<td>$\quad$</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>\updownarrow</td>
+<td></td>
+<td>$\updownarrow$</td>
+<td>$\quad$</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>\mapsto</td>
+<td></td>
+<td>$\mapsto$</td>
+<td>$\quad$</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>\dashrightarrow</td>
+<td></td>
+<td>$\dashrightarrow$</td>
+<td>$\quad$</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>\longrightarrow</td>
+<td></td>
+<td>$\longrightarrow$</td>
+<td>$\quad$</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>\longleftarrow</td>
+<td></td>
+<td>$\longleftarrow$</td>
+<td>$\quad$</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>\leftarrow</td>
+<td></td>
+<td>$\leftarrow$</td>
+<td>$\quad$</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>\Rightarrow</td>
+<td></td>
+<td>$\Rightarrow$</td>
+<td>$\quad$</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>\Leftarrow</td>
+<td></td>
+<td>$\Leftarrow$</td>
+<td>$\quad$</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>\leftrightarrow</td>
+<td></td>
+<td>$\leftrightarrow$</td>
+<td>$\quad$</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>\Leftrightarrow</td>
+<td></td>
+<td>$\Leftrightarrow$</td>
+<td>$\quad$</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Sheng Wang</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://shengwang.fun/2024/10/20/ML/markdownmath/">https://shengwang.fun/2024/10/20/ML/markdownmath/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Markdown/"># Markdown</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2024/10/20/ML/ML1/">ML1</a>
+            
+            
+            <a class="next" rel="next" href="/2024/10/06/GameAI/GameAI1/">游戏AI</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Sheng Wang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+
+    </div>
+</body>
+
+</html>
