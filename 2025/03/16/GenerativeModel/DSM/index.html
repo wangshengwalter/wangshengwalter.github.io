@@ -13,7 +13,7 @@
 
 
 
-<title>ML15 Influence Functions | Hexo</title>
+<title>Denoising Score Matching | Hexo</title>
 
 
 
@@ -259,7 +259,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title" itemprop="name headline">ML15 Influence Functions</h1>
+            <h1 class="post-title" itemprop="name headline">Denoising Score Matching</h1>
             
                 <div class="post-meta">
                     
@@ -268,14 +268,14 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">December 11, 2024&nbsp;&nbsp;0:03:00</a>
+                        Date: <a href="#">March 16, 2025&nbsp;&nbsp;16:40:58</a>
                         </span>
                     
                     
                         <span class="post-category">
                     Category:
                             
-                                <a href="/categories/ML/">ML</a>
+                                <a href="/categories/Generative-Model/">Generative Model</a>
                             
                         </span>
                     
@@ -284,56 +284,19 @@
         </header>
 
         <div class="post-content">
-            <h1 id="Influence-Functions"><a href="#Influence-Functions" class="headerlink" title="Influence Functions"></a>Influence Functions</h1><p>Q: which trainning data points are the most influential for our model?</p>
-<p>Suppose a data set $\mathbb{D}$</p>
-<p>$$\mathbb{D} \underset{ERM}{\to} \hat{f}_\theta$$<br>$x_i \in \mathbb{D}$</p>
-<p>$$\mathbb{D}’ \underset{ERM}{\to} \hat{f}_{\hat{\theta}}$$<br>$x_i \notin \mathbb{D}’$</p>
-<h2 id="Notions"><a href="#Notions" class="headerlink" title="Notions:"></a>Notions:</h2><p>$$<br>\begin{aligned}<br>&amp; \mathbb{D} &#x3D; \{(x_i, y_i)\}_{i&#x3D;1}^n \quad[\text{full trainning data}] \\<br>&amp; \mathbb{D}^{\neg i} &#x3D; \{(x_j, y_j)\}_{j \neq i }^n \quad[\text{leave ith datapoint out dataset}]<br>\end{aligned}<br>$$</p>
-<p>$$<br>\begin{aligned}<br>&amp; \hat{ \theta}_{n} \in \underset{\theta \in \Theta}{argmin} \underset{z \sim D}{\hat{\mathbb{E}}} [l(z, \theta)] &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^n \left[l(z_i, \theta) \right] \\<br>&amp; \hat{\theta}^{\neg i } \in \underset{\theta \in \Theta}{argmin} \underset{z \sim D^{\neg i}}{\hat{\mathbb{E}}}[l(z, \theta)] &#x3D; \frac{1}{n-1} \sum_{j \neq i} \left[l(z_i, \theta) \right]<br>\end{aligned}<br>$$</p>
-<hr>
-<p>Define:<br>$\epsilon \in R, z &#x3D; (x,y)$</p>
-<p>$$<br>\hat{\theta}_{\epsilon, z} \in \underset{\theta \in \Theta}{argmin} \frac{1}{n} \sum_{i&#x3D;1}^n l(z_i, \theta) + \epsilon \cdot l(z, \theta)<br>$$</p>
-<ul>
-<li>the first part is origin loss function: $\frac{1}{n} \sum_{i&#x3D;1}^n l(z_i, \theta) &#x3D; \underset{\hat{z} \sim D}{\hat{\mathbb{E}}} l(\hat{z}, \theta)$<br>$$\hat{\theta}_{0, z} &#x3D; \hat{\theta}_n$$<br>$$\hat{\theta}_{1&#x2F;n, z_i} &#x3D; \hat{\theta}^{\neg i}$$</li>
-</ul>
+            <h1 id="DSM"><a href="#DSM" class="headerlink" title="DSM"></a>DSM</h1><p>Important: The generative model presented in this article comes from an assignment in USC EE660, a course taught by Professor Stephen Lyle Tu. Since I skipped some prerequisite ML courses, my foundational understanding of ML principles is not particularly strong, and I am not particularly interested in ML theory. As a result, my grade in this course was relatively low. However, Professor Stephen still put a great deal of effort into this course, teaching the theoretical foundations of many algorithms. Although theory can be dry, it is indeed a crucial part of understanding algorithms! I highly recommend taking this course—don’t worry about your GPA; just learn what you want to learn.</p>
+<p>It is important to note that the generative model presented in this article is very simple. You don’t even need to implement the model yourself; you can simply use the corresponding libraries. Using open-source libraries is much more convenient. This article aims to highlight some finer details of generative algorithms. Additionally, simply calling GPT can generate similar code.</p>
 <blockquote>
-<p>First order Taylor expansion:<br>$$\hat{\theta}^{\neg i} &#x3D; \hat{\theta_n} - \frac{1}{n} \cdot \frac{\partial \hat{\theta}_{\epsilon,z_i}}{\partial \epsilon}|_{\epsilon&#x3D;0}$$<br>$$h(\epsilon) &#x3D; \hat{\theta}_{\epsilon, z_i}$$<br>$$\begin{aligned}<br>h(-\frac{1}{n}) &amp;&#x3D; h(0)+h’(0)\cdot [-\frac{1}{n}] + 0(\frac{1}{n^2}) \\<br>&amp; \approx h(0) -\frac{1}{n} h’(0)<br>\end{aligned}<br>$$<br>$$<br>\begin{aligned}<br>h(-\frac{1}{n}) &amp;&#x3D; h(0)+h’(0)\cdot [-\frac{1}{n}] + 0(\frac{1}{n^2}) \\<br>&amp; \approx h(0) -\frac{1}{n} h’(0)<br>\end{aligned}<br>$$<br>$h(-\frac{1}{n}) &#x3D; \hat{\theta}_{-\frac{1}{n},z_i} &#x3D; \hat{\theta}^{\neg i}$<br>$h(0) &#x3D; \hat{\theta}_{0,z_i} &#x3D; \hat{\theta}_n$</p>
+<p>重要：本文展示的生成式模型来自USC EE660的作业。该科程来自Stephen Lyle Tu。由于我跳过了一些ML的前置科程，一些ML的基础原理并没有特别扎实，并且我对ML的理论知识其实并不感兴趣。所以我这门课程的分数较低。但是Pro Stephen依旧在这门科程上付出了许多心血。教授了许多算法的理论基础。尽管理论是枯燥的，但这确实是理解算法特别重要的一环！我强烈推荐去上这门课。不要担心自己的GPA。想学什么就学什么。<br>需要注意的是本文展示的生成式模型是十分简单的，你甚至不用自己去实现这个模型，直接去使用对应的库就可以。使用开源库更加方便，此文指在展示生成式算法的一些细枝末节。并且简单的调用GPT也可以生成出这种代码。</p>
 </blockquote>
-<h3 id="Prop"><a href="#Prop" class="headerlink" title="Prop"></a>Prop</h3><p>suppose that $\hat{\theta}_n$ is a strict optimizer.<br>Suppose $l(z,t)$ is twice differentiable.<br>$$<br>\frac{\partial \hat{\theta}_{\epsilon,z_i}}{\partial \epsilon}|_{\epsilon&#x3D;0} &#x3D; -H(\hat{\theta_n})^{-1} \nabla_\theta l(z, \hat{\theta}_n)<br>$$</p>
-<p>$$<br>H(\theta) &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^n \nabla_\theta^2 l(z_i, \theta)<br>$$</p>
-<h3 id="proof"><a href="#proof" class="headerlink" title="proof"></a>proof</h3><p>$\hat{\theta}_{\epsilon,z_i}$ is an optimal solution to $\frac{1}{n} \sum_{i&#x3D;1}^n l(z_i, \theta) + \epsilon \cdot l(z, \theta)$</p>
-<p>Thus, the gradient of that equation is 0<br>$$<br>0 &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^n \nabla_\theta l(z_i, \hat{\theta}_{\epsilon,z}) + \epsilon \cdot \nabla_\theta l(z, \hat{\theta}_{\epsilon,z})<br>$$<br>We just suppose $F(\epsilon) &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^n \nabla_\theta l(z_i, \hat{\theta}_{\epsilon,z}) + \epsilon \cdot \nabla_\theta l(z, \hat{\theta}_{\epsilon,z})$</p>
-<p>we know that if $0 &#x3D; F(\epsilon)$, then $0 &#x3D; \frac{\partial}{\partial \epsilon} F(\epsilon)$</p>
-<p>Thus,:<br>$$<br>0 &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^n \frac{\partial}{\partial \epsilon} \nabla_\theta l(z_i, \hat{\theta}_{\epsilon,z}) + \frac{\partial}{\partial \epsilon} \left[\epsilon \cdot \nabla_\theta l(z, \hat{\theta}_{\epsilon,z}) \right]<br>$$</p>
-<p>Then we can deal with first part:<br>$$<br>\frac{\partial}{\partial \epsilon} \nabla_\theta l(z_i, \hat{\theta}_{\epsilon,z}) &#x3D; \nabla_\theta^2 l(z_i, \hat{\theta}_{\epsilon,z}) \cdot  \frac{\partial}{\partial \epsilon} \hat{\theta}_{\epsilon,z}<br>$$</p>
-<p>Note: <br>$\frac{\partial}{\partial \epsilon} \hat{\theta}_{\epsilon,z}$ is the derivative of the solution curve!! that’s good~</p>
-<p>Then we deal with the second term:<br>$$<br>\frac{\partial}{\partial \epsilon} \left[\epsilon \cdot \nabla_\theta l(z, \hat{\theta}_{\epsilon,z}) \right] &#x3D; \epsilon \cdot \frac{\partial}{\partial \epsilon}  \cdot \nabla_\theta l(z, \hat{\theta}_{\epsilon,z}) + \nabla_\theta l(z, \hat{\theta}_{\epsilon,z})<br>$$</p>
-<p>Now put the first term and second term together:<br>$$<br>0 &#x3D; \left[ \frac{1}{n} \sum_{i&#x3D;1}^n  \nabla_\theta^2 l(z_i, \hat{\theta}_{\epsilon,z}) \right] \cdot  \frac{\partial}{\partial \epsilon} \hat{\theta}_{\epsilon,z} + \epsilon \cdot \frac{\partial}{\partial \epsilon}  \cdot \nabla_\theta l(z, \hat{\theta}_{\epsilon,z}) + \nabla_\theta l(z, \hat{\theta}_{\epsilon,z})<br>$$</p>
-<p>Evaluating RHS at $\epsilon &#x3D; 0$:<br>$$<br>0 &#x3D; \left[ \frac{1}{n} \sum_{i&#x3D;1}^n  \nabla_\theta^2 l(z_i, \hat{\theta}_{\epsilon,z}) \right] \cdot  \frac{\partial}{\partial \epsilon} \hat{\theta}_{\epsilon,z} |_0 + \nabla_\theta l(z, \hat{\theta}_{\epsilon,z})<br>$$</p>
+<h1 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Activation = Callable[[jax.Array], jax.Array]</span><br><span class="line"></span><br><span class="line">class MLP(nn.Module):</span><br><span class="line">    </span><br><span class="line">    features: Sequence[int]</span><br><span class="line">    activation: Activation = nn.swish</span><br><span class="line"></span><br><span class="line">    @nn.compact</span><br><span class="line">    def __call__(self, x: jax.Array) -&gt; jax.Array:</span><br><span class="line">        for f in self.features[:-1]:</span><br><span class="line">            x = nn.Dense(f)(x)</span><br><span class="line">            x = self.activation(x)</span><br><span class="line">        x = nn.Dense(self.features[-1])(x)</span><br><span class="line">        return x</span><br><span class="line"></span><br><span class="line">model = MLP(features=[64, 64, 2])</span><br><span class="line"></span><br><span class="line">params = model.init(next(prng_seq), X_train[:1, ...])</span><br><span class="line">opt_state = optimizer.init(params)</span><br><span class="line">bm = BatchManager(data=X_train, batch_size=128, key=next(prng_seq))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">def dsm_loss(params: chex.ArrayTree, batch: jax.Array, sigma: float, k: int) -&gt; float:</span><br><span class="line"></span><br><span class="line">    n, d = batch.shape</span><br><span class="line">    noise = jax.random.normal(jax.random.PRNGKey(0), shape=(n, k, d))  # w_i^&#123;j,k&#125; ~ N(0, I)</span><br><span class="line">    perturbed_inputs = batch[:, None, :] + sigma * noise</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    model_outputs = jax.vmap(lambda x_j: model.apply(params, x_j), in_axes=(0,))(perturbed_inputs.reshape(-1, d))</span><br><span class="line">    model_outputs = model_outputs.reshape(n, k, d)</span><br><span class="line">    term1 = jnp.linalg.norm(perturbed_inputs + sigma**2 * model_outputs - batch[:, None, :], axis=-1) ** 2</span><br><span class="line"></span><br><span class="line">    loss = jnp.sum(term1) / (n * k * sigma**4)</span><br><span class="line"></span><br><span class="line">    return loss</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
 <blockquote>
-<p>$0 &#x3D; Hx+q$<br>$x &#x3D; -H^{-1}q$</p>
+<p>Generate samples through langevin sampling</p>
 </blockquote>
-<p>Thus:<br>$$<br>\frac{\partial}{\partial \epsilon} \hat{\theta}_{\epsilon,z} |_{\epsilon&#x3D;0} &#x3D; -\left[ \frac{1}{n} \sum_{i&#x3D;1}^n  \nabla_\theta^2 l(z_i, \hat{\theta}_{\epsilon,z}) \right]^{-1} \nabla_\theta l(z, \hat{\theta}_{\epsilon,z})<br>$$</p>
-<hr>
-<p>We have an approximate formula:<br>$$<br>\begin{aligned}<br>\hat{\theta}_{\epsilon, z} &amp; \approx \hat{\theta_n} - \frac{1}{n} \frac{\partial}{\partial \epsilon} \hat{\theta}_{\epsilon,z} |_{\epsilon&#x3D;0} \\<br>&amp;&#x3D; \hat{\theta_n} + \frac{1}{n} H(\hat{\theta_n})^{-1} \nabla_\theta \cdot l(z_i, \hat{\theta_n})<br>\end{aligned}<br>$$</p>
-<p>The above approx come from Taylor expansion!!</p>
-<p>Now we have a function $F$:<br>$$<br>F:\Theta \to R<br>$$</p>
-<p>$$<br>F(\hat{\theta}^{\neg i}) &#x3D; F(\hat{\theta}_n) + &lt;\nabla F(\hat{\theta}_n), \hat{\theta}^{\neg i}- \hat{\theta}_n&gt; + \text{higher order term}<br>$$</p>
-<p>plugin above approx equation about $\hat{\theta}_{\epsilon,z}$<br>$$<br>F(\hat{\theta}^{\neg i}) &#x3D; F(\hat{\theta}_n) + &lt;\nabla F(\hat{\theta}_n), \frac{1}{n} H(\hat{\theta}_n)^{-1} \nabla_\theta \cdot l(z_i, \hat{\theta}_n)&gt; + \text{higher order term}<br>$$</p>
-<p>due to the def:<br>$$<br>F(\theta) &#x3D; l(z, \theta)<br>$$<br>Thus, if $z &#x3D; z_i$<br>$$<br>l(z, \hat{\theta}^{\neg i}) \approx l(z, \hat{\theta}_n) + \frac{1}{n} &lt;\nabla_\theta l(z, \hat{\theta}_n),  H(\hat{\theta}_n)^{-1} \nabla_\theta \cdot l(z_i, \hat{\theta}_n)&gt;<br>$$</p>
-<p>We need to know that :</p>
-<p>$$<br>l(z_i, \hat{\theta}^{\neg i}) \geq l(z_i, \hat{\theta}_n)<br>$$</p>
-<ul>
-<li>the left term doesn’t have $z_i$</li>
-<li>the right term has $z_i$</li>
-</ul>
-<hr>
-<p>There are still some issue in influence functions:</p>
-<ol>
-<li>Hessians function are expected to computer and store $O(d^2)$</li>
-<li>strick sptimize problem!!</li>
-</ol>
-<p><strong>Loss some notes here, last 25mins, about fixing these two problem!!!</strong></p>
 
         </div>
 
@@ -348,7 +311,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="https://shengwang.fun/2024/12/11/ML/ML15_influence_fun/">https://shengwang.fun/2024/12/11/ML/ML15_influence_fun/</a></span>
+                        <span><a href="https://shengwang.fun/2025/03/16/GenerativeModel/DSM/">https://shengwang.fun/2025/03/16/GenerativeModel/DSM/</a></span>
                     </p>
                 
                 
@@ -367,7 +330,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/ML/"># ML</a>
+                        <a href="/tags/Generative-Model/"># Generative Model</a>
                     
                         
                 </span>
@@ -380,10 +343,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2025/03/16/GenerativeModel/VAE/">Variational autoencoder</a>
+                <a class="prev" rel="prev" href="/2025/03/16/GenerativeModel/DDPM/">Denoising Diffusion Probabilistic Models</a>
             
             
-            <a class="next" rel="next" href="/2024/12/10/ML/ML14_continous_normalizing_flow/">ML14 Continous Normalizing Flow & ODE & PCA</a>
+            <a class="next" rel="next" href="/2025/03/16/GenerativeModel/VAE/">Variational autoencoder</a>
             
         </section>
 
