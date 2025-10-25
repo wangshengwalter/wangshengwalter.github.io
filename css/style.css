@@ -936,7 +936,7 @@ header label {
   }
   #features section:last-child {
     border-bottom: none;
-    margin-bottom: 20vh;
+    margin-bottom: 10vh;
   }
 }
 .contactinfo {
