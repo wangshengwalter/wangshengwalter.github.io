@@ -44,7 +44,7 @@
     
 
 
-<meta name="generator" content="Hexo 7.1.1"></head>
+<meta name="generator" content="Hexo 8.0.0"></head>
 
 <body>
     <script>
@@ -174,15 +174,32 @@
 
         <div class="post-content">
             <ol>
-<li>奶奶滴，第一部新建文件夹……<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/ros2_ws/src</span><br><span class="line">cd ~/ros2_ws/src</span><br></pre></td></tr></table></figure></li>
-<li>去新建文件夹里面的src文件夹里面; ament_cmake 代表使用c++进行编译； 记得修改packet name<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ros2 pkg create --build-type ament_cmake PACKET_NAME</span><br></pre></td></tr></table></figure></li>
+<li>奶奶滴，第一部新建文件夹……</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/ros2_ws/src</span><br><span class="line">cd ~/ros2_ws/src</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>去新建文件夹里面的src文件夹里面; ament_cmake 代表使用c++进行编译； 记得修改packet name</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ros2 pkg create --build-type ament_cmake PACKET_NAME</span><br></pre></td></tr></table></figure>
+<ol start="3">
 <li>去新建的packet里面的src里面把键盘扣下来</li>
 <li>完善package.xml和CMakeLists.txt<br>具体参照： <a target="_blank" rel="noopener" href="https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Cpp-Publisher-And-Subscriber.html">https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Cpp-Publisher-And-Subscriber.html</a></li>
-<li>回到根文件夹，不是packet的根文件夹，是工作站的根目录<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rosdep install -i --from-path src --rosdistro foxy -y</span><br></pre></td></tr></table></figure></li>
-<li>build packet, 本质还是cmake<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">colcon build --packages-select PACKET_NAME</span><br></pre></td></tr></table></figure></li>
-<li>到这一步其实就已经搞完了，下面你就可以开始运行了。每打开一个新终端，都必须要运行一边下面的代码；别问为什么。问就是不知道<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">. install/setup.bash</span><br></pre></td></tr></table></figure></li>
-<li>下面就是正式运行了：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ros2 run cpp_pubsub NODE_NAME</span><br></pre></td></tr></table></figure></li>
+<li>回到根文件夹，不是packet的根文件夹，是工作站的根目录</li>
 </ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rosdep install -i --from-path src --rosdistro foxy -y</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>build packet, 本质还是cmake</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">colcon build --packages-select PACKET_NAME</span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li>到这一步其实就已经搞完了，下面你就可以开始运行了。每打开一个新终端，都必须要运行一边下面的代码；别问为什么。问就是不知道</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">. install/setup.bash</span><br></pre></td></tr></table></figure>
+<ol start="8">
+<li>下面就是正式运行了：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ros2 run cpp_pubsub NODE_NAME</span><br></pre></td></tr></table></figure>
+
 
         </div>
 

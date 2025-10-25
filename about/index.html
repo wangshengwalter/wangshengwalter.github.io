@@ -44,7 +44,7 @@
     
 
 
-<meta name="generator" content="Hexo 7.1.1"></head>
+<meta name="generator" content="Hexo 8.0.0"></head>
 
 <body>
     <script>
@@ -147,13 +147,12 @@
     <h3>ROS, Ubuntu/Linux, AWS, Google Development kits, Git, Chat-GPT</h3>
 </div>
 
+<div class="exp_title">
+    <h1>Working Experience</h1>
+    <img class="title_divi" src="/image/lrise.png">
+</div>
+
 <div class="about-container"> 
-    <div class="exp_title">
-        <h1>Working Experience</h1>
-        <img class="title_divi" src="/image/lrise.png">
-    </div>
-
-
     <div id="map"></div>
     <div id="features">
         <section id="bachelor" class="active">
@@ -226,6 +225,20 @@
                 developers.
             </p>
         </section>
+        <section id="tencent_intern">
+            <h3>Software Developer Internship(Java)</h3>
+            <h4>May,2024 ~ Aug,2024</h4>
+            <p>
+                ●Improve compliance of applications on the Tencent Android platform. <br />
+                ●Utilize the Rightly SDK to monitor services that automatically start as providers and receivers. <br />
+                ●Analyze logs to pinpoint the locations of auto-start services, providers, and receivers. <br />
+                ●Implement the MarrHildrethHash and DNSCAN algorithms for scanning and cleaning similar images. <br />
+                ●Utilize database for caching, optimizing image scanning speed, and accelerating similar image scanning by 9%. <br />
+                ●Integrate OpenCV into Android applications through native C++ methods and building the static library. <br />
+                ●Reducing software size by 16MB for photo scanner through using plugin. <br />
+                ●Design a data traffic control by using android vpn service. <br />
+            </p>
+        </section>
         <section id="Master">
             <h3>University of Southern California - Los Angeles</h3>
             <h4>Aug,2023 ~ May,2025</h4>
@@ -233,11 +246,14 @@
                 Master of Applied Science - Computer Engineering
             </p>
         </section>
-        <section id="self_blog">
-            <h3>Hexo theme Design(html, JS, NodeJS, CSS)</h3>
-            <h4>Mar,2024 ~ Cur</h4>
+        <section id="tencent_fulltime">
+            <h3>Software Developer(Java)</h3>
+            <h4>Aug,2025 ~ Current</h4>
             <p>
-                ●Design and implemente the Hexo theme for my personal blog.
+                ●Participated in the development of a remote control tool for Windows PCs from mobile devices and the UI for the Android app. <br />
+                ●Contributed to the development of a multi-language version of a third-party Android app download platform. <br />
+                ●Assisted in the development of a Gradle plugin that automatically generates obfuscation rules by simulating bytecode execution and scanning for reflections. <br />
+                ●Optimized obfuscation rules to reduce the size of Android APKs. <br />
             </p>
         </section>
     </div>
@@ -262,10 +278,10 @@
     window.addEventListener('scroll', () => {
         let value = window.scrollY;
         about_title.style.marginTop = value * 1 + 'px';
-        town1.style.marginTop = -value * 0.2 + 'px';
+        town1.style.marginTop = -value * 0.15 + 'px';
         town2.style.marginTop = value * 0.1 + 'px';
         hill.style.marginTop = value * 0.2 + 'px';
-        tree.style.marginTop = -value * 0.8 + 'px';
+        tree.style.marginTop = -value * 0.6 + 'px';
         starnight.style.marginTop = value * 0.3 + 'px';
     });
     var origin_parallax_width = 1505;
@@ -287,7 +303,8 @@
         center: [-123.246282, 49.260480],
         zoom: 14,
         bearing: 0,
-        pitch: 20
+        pitch: 20,
+        interactive: false,
     });
 
     const chapters = {
@@ -331,17 +348,23 @@
             zoom: 10,
             pitch: 20
         },
+        'tencent_intern': {
+            bearing: 90,
+            center: [114.057868, 22.543099],
+            zoom: 10,
+            pitch: 40
+        },
         'Master': {
             bearing: 180,
             center: [-118.285043, 34.022227],
             zoom: 15
         },
-        'self_blog': {
+        'tencent_fulltime': {
             bearing: 90,
-            center: [-118.285043, 34.022227],
+            center: [114.057868, 22.543099],
             zoom: 10,
             pitch: 40
-        }
+        },
     };
 
     let activeChapterName = 'bachelor';
@@ -361,9 +384,14 @@
         const bounding = element.getBoundingClientRect();
         const scrollview = document.getElementById('features')
         const scrollbonding = scrollview.getBoundingClientRect();
-        const totalcontentheight = scrollview.scrollHeight;
+        // 容器的从上往下75%处的Y轴位置
+        const scrollviewYCenter = (3 * scrollbonding.top + scrollbonding.height) * 0.25;
 
-        return bounding.top >scrollbonding.top;
+        const isCenterInElement = (
+            scrollviewYCenter >= bounding.top &&
+            scrollviewYCenter <= bounding.bottom
+        );
+        return isCenterInElement;
     }
     function firstelementOnScreen(id){
         const element = document.getElementById(id);
@@ -399,8 +427,8 @@
         }
 
         if(reachbottom()){
-           setActiveChapter(scrollview[scrollview_size-1]);
-           return;
+            setActiveChapter(scrollview[scrollview_size-1]);
+            return;
         }
 
         for(var i = 1; i < scrollview_size-1; i++){

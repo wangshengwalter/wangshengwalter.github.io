@@ -83,7 +83,7 @@
     
 
 
-<meta name="generator" content="Hexo 7.1.1"></head>
+<meta name="generator" content="Hexo 8.0.0"></head>
 
 <body>
     <script>
@@ -288,18 +288,18 @@
 <p>Suppose a data set $\mathbb{D}$</p>
 <p>$$\mathbb{D} \underset{ERM}{\to} \hat{f}_\theta$$<br>$x_i \in \mathbb{D}$</p>
 <p>$$\mathbb{D}’ \underset{ERM}{\to} \hat{f}_{\hat{\theta}}$$<br>$x_i \notin \mathbb{D}’$</p>
-<h2 id="Notions"><a href="#Notions" class="headerlink" title="Notions:"></a>Notions:</h2><p>$$<br>\begin{aligned}<br>&amp; \mathbb{D} &#x3D; \{(x_i, y_i)\}_{i&#x3D;1}^n \quad[\text{full trainning data}] \\<br>&amp; \mathbb{D}^{\neg i} &#x3D; \{(x_j, y_j)\}_{j \neq i }^n \quad[\text{leave ith datapoint out dataset}]<br>\end{aligned}<br>$$</p>
-<p>$$<br>\begin{aligned}<br>&amp; \hat{ \theta}_{n} \in \underset{\theta \in \Theta}{argmin} \underset{z \sim D}{\hat{\mathbb{E}}} [l(z, \theta)] &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^n \left[l(z_i, \theta) \right] \\<br>&amp; \hat{\theta}^{\neg i } \in \underset{\theta \in \Theta}{argmin} \underset{z \sim D^{\neg i}}{\hat{\mathbb{E}}}[l(z, \theta)] &#x3D; \frac{1}{n-1} \sum_{j \neq i} \left[l(z_i, \theta) \right]<br>\end{aligned}<br>$$</p>
+<h2 id="Notions"><a href="#Notions" class="headerlink" title="Notions:"></a>Notions:</h2><p>$$<br>\begin{aligned}<br>&amp; \mathbb{D} &#x3D; \{(x_i, y_i)\}<em>{i&#x3D;1}^n \quad[\text{full trainning data}] \\<br>&amp; \mathbb{D}^{\neg i} &#x3D; \{(x_j, y_j)\}</em>{j \neq i }^n \quad[\text{leave ith datapoint out dataset}]<br>\end{aligned}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>&amp; \hat{ \theta}<em>{n} \in \underset{\theta \in \Theta}{argmin} \underset{z \sim D}{\hat{\mathbb{E}}} [l(z, \theta)] &#x3D; \frac{1}{n} \sum</em>{i&#x3D;1}^n \left[l(z_i, \theta) \right] \\<br>&amp; \hat{\theta}^{\neg i } \in \underset{\theta \in \Theta}{argmin} \underset{z \sim D^{\neg i}}{\hat{\mathbb{E}}}[l(z, \theta)] &#x3D; \frac{1}{n-1} \sum_{j \neq i} \left[l(z_i, \theta) \right]<br>\end{aligned}<br>$$</p>
 <hr>
 <p>Define:<br>$\epsilon \in R, z &#x3D; (x,y)$</p>
-<p>$$<br>\hat{\theta}_{\epsilon, z} \in \underset{\theta \in \Theta}{argmin} \frac{1}{n} \sum_{i&#x3D;1}^n l(z_i, \theta) + \epsilon \cdot l(z, \theta)<br>$$</p>
+<p>$$<br>\hat{\theta}<em>{\epsilon, z} \in \underset{\theta \in \Theta}{argmin} \frac{1}{n} \sum</em>{i&#x3D;1}^n l(z_i, \theta) + \epsilon \cdot l(z, \theta)<br>$$</p>
 <ul>
-<li>the first part is origin loss function: $\frac{1}{n} \sum_{i&#x3D;1}^n l(z_i, \theta) &#x3D; \underset{\hat{z} \sim D}{\hat{\mathbb{E}}} l(\hat{z}, \theta)$<br>$$\hat{\theta}_{0, z} &#x3D; \hat{\theta}_n$$<br>$$\hat{\theta}_{1&#x2F;n, z_i} &#x3D; \hat{\theta}^{\neg i}$$</li>
+<li>the first part is origin loss function: $\frac{1}{n} \sum_{i&#x3D;1}^n l(z_i, \theta) &#x3D; \underset{\hat{z} \sim D}{\hat{\mathbb{E}}} l(\hat{z}, \theta)$<br>$$\hat{\theta}_{0, z} &#x3D; \hat{\theta}<em>n$$<br>$$\hat{\theta}</em>{1&#x2F;n, z_i} &#x3D; \hat{\theta}^{\neg i}$$</li>
 </ul>
 <blockquote>
 <p>First order Taylor expansion:<br>$$\hat{\theta}^{\neg i} &#x3D; \hat{\theta_n} - \frac{1}{n} \cdot \frac{\partial \hat{\theta}_{\epsilon,z_i}}{\partial \epsilon}|_{\epsilon&#x3D;0}$$<br>$$h(\epsilon) &#x3D; \hat{\theta}_{\epsilon, z_i}$$<br>$$\begin{aligned}<br>h(-\frac{1}{n}) &amp;&#x3D; h(0)+h’(0)\cdot [-\frac{1}{n}] + 0(\frac{1}{n^2}) \\<br>&amp; \approx h(0) -\frac{1}{n} h’(0)<br>\end{aligned}<br>$$<br>$$<br>\begin{aligned}<br>h(-\frac{1}{n}) &amp;&#x3D; h(0)+h’(0)\cdot [-\frac{1}{n}] + 0(\frac{1}{n^2}) \\<br>&amp; \approx h(0) -\frac{1}{n} h’(0)<br>\end{aligned}<br>$$<br>$h(-\frac{1}{n}) &#x3D; \hat{\theta}_{-\frac{1}{n},z_i} &#x3D; \hat{\theta}^{\neg i}$<br>$h(0) &#x3D; \hat{\theta}_{0,z_i} &#x3D; \hat{\theta}_n$</p>
 </blockquote>
-<h3 id="Prop"><a href="#Prop" class="headerlink" title="Prop"></a>Prop</h3><p>suppose that $\hat{\theta}_n$ is a strict optimizer.<br>Suppose $l(z,t)$ is twice differentiable.<br>$$<br>\frac{\partial \hat{\theta}_{\epsilon,z_i}}{\partial \epsilon}|_{\epsilon&#x3D;0} &#x3D; -H(\hat{\theta_n})^{-1} \nabla_\theta l(z, \hat{\theta}_n)<br>$$</p>
+<h3 id="Prop"><a href="#Prop" class="headerlink" title="Prop"></a>Prop</h3><p>suppose that $\hat{\theta}<em>n$ is a strict optimizer.<br>Suppose $l(z,t)$ is twice differentiable.<br>$$<br>\frac{\partial \hat{\theta}_{\epsilon,z_i}}{\partial \epsilon}|_{\epsilon&#x3D;0} &#x3D; -H(\hat{\theta_n})^{-1} \nabla</em>\theta l(z, \hat{\theta}_n)<br>$$</p>
 <p>$$<br>H(\theta) &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^n \nabla_\theta^2 l(z_i, \theta)<br>$$</p>
 <h3 id="proof"><a href="#proof" class="headerlink" title="proof"></a>proof</h3><p>$\hat{\theta}_{\epsilon,z_i}$ is an optimal solution to $\frac{1}{n} \sum_{i&#x3D;1}^n l(z_i, \theta) + \epsilon \cdot l(z, \theta)$</p>
 <p>Thus, the gradient of that equation is 0<br>$$<br>0 &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^n \nabla_\theta l(z_i, \hat{\theta}_{\epsilon,z}) + \epsilon \cdot \nabla_\theta l(z, \hat{\theta}_{\epsilon,z})<br>$$<br>We just suppose $F(\epsilon) &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^n \nabla_\theta l(z_i, \hat{\theta}_{\epsilon,z}) + \epsilon \cdot \nabla_\theta l(z, \hat{\theta}_{\epsilon,z})$</p>
@@ -308,14 +308,14 @@
 <p>Then we can deal with first part:<br>$$<br>\frac{\partial}{\partial \epsilon} \nabla_\theta l(z_i, \hat{\theta}_{\epsilon,z}) &#x3D; \nabla_\theta^2 l(z_i, \hat{\theta}_{\epsilon,z}) \cdot  \frac{\partial}{\partial \epsilon} \hat{\theta}_{\epsilon,z}<br>$$</p>
 <p>Note: <br>$\frac{\partial}{\partial \epsilon} \hat{\theta}_{\epsilon,z}$ is the derivative of the solution curve!! that’s good~</p>
 <p>Then we deal with the second term:<br>$$<br>\frac{\partial}{\partial \epsilon} \left[\epsilon \cdot \nabla_\theta l(z, \hat{\theta}_{\epsilon,z}) \right] &#x3D; \epsilon \cdot \frac{\partial}{\partial \epsilon}  \cdot \nabla_\theta l(z, \hat{\theta}_{\epsilon,z}) + \nabla_\theta l(z, \hat{\theta}_{\epsilon,z})<br>$$</p>
-<p>Now put the first term and second term together:<br>$$<br>0 &#x3D; \left[ \frac{1}{n} \sum_{i&#x3D;1}^n  \nabla_\theta^2 l(z_i, \hat{\theta}_{\epsilon,z}) \right] \cdot  \frac{\partial}{\partial \epsilon} \hat{\theta}_{\epsilon,z} + \epsilon \cdot \frac{\partial}{\partial \epsilon}  \cdot \nabla_\theta l(z, \hat{\theta}_{\epsilon,z}) + \nabla_\theta l(z, \hat{\theta}_{\epsilon,z})<br>$$</p>
-<p>Evaluating RHS at $\epsilon &#x3D; 0$:<br>$$<br>0 &#x3D; \left[ \frac{1}{n} \sum_{i&#x3D;1}^n  \nabla_\theta^2 l(z_i, \hat{\theta}_{\epsilon,z}) \right] \cdot  \frac{\partial}{\partial \epsilon} \hat{\theta}_{\epsilon,z} |_0 + \nabla_\theta l(z, \hat{\theta}_{\epsilon,z})<br>$$</p>
+<p>Now put the first term and second term together:<br>$$<br>0 &#x3D; \left[ \frac{1}{n} \sum_{i&#x3D;1}^n  \nabla_\theta^2 l(z_i, \hat{\theta}<em>{\epsilon,z}) \right] \cdot  \frac{\partial}{\partial \epsilon} \hat{\theta}_{\epsilon,z} + \epsilon \cdot \frac{\partial}{\partial \epsilon}  \cdot \nabla</em>\theta l(z, \hat{\theta}_{\epsilon,z}) + \nabla_\theta l(z, \hat{\theta}_{\epsilon,z})<br>$$</p>
+<p>Evaluating RHS at $\epsilon &#x3D; 0$:<br>$$<br>0 &#x3D; \left[ \frac{1}{n} \sum_{i&#x3D;1}^n  \nabla_\theta^2 l(z_i, \hat{\theta}_{\epsilon,z}) \right] \cdot  \frac{\partial}{\partial \epsilon} \hat{\theta}_{\epsilon,z} |<em>0 + \nabla</em>\theta l(z, \hat{\theta}_{\epsilon,z})<br>$$</p>
 <blockquote>
 <p>$0 &#x3D; Hx+q$<br>$x &#x3D; -H^{-1}q$</p>
 </blockquote>
 <p>Thus:<br>$$<br>\frac{\partial}{\partial \epsilon} \hat{\theta}_{\epsilon,z} |_{\epsilon&#x3D;0} &#x3D; -\left[ \frac{1}{n} \sum_{i&#x3D;1}^n  \nabla_\theta^2 l(z_i, \hat{\theta}_{\epsilon,z}) \right]^{-1} \nabla_\theta l(z, \hat{\theta}_{\epsilon,z})<br>$$</p>
 <hr>
-<p>We have an approximate formula:<br>$$<br>\begin{aligned}<br>\hat{\theta}_{\epsilon, z} &amp; \approx \hat{\theta_n} - \frac{1}{n} \frac{\partial}{\partial \epsilon} \hat{\theta}_{\epsilon,z} |_{\epsilon&#x3D;0} \\<br>&amp;&#x3D; \hat{\theta_n} + \frac{1}{n} H(\hat{\theta_n})^{-1} \nabla_\theta \cdot l(z_i, \hat{\theta_n})<br>\end{aligned}<br>$$</p>
+<p>We have an approximate formula:<br>$$<br>\begin{aligned}<br>\hat{\theta}_{\epsilon, z} &amp; \approx \hat{\theta_n} - \frac{1}{n} \frac{\partial}{\partial \epsilon} \hat{\theta}<em>{\epsilon,z} |_{\epsilon&#x3D;0} \\<br>&amp;&#x3D; \hat{\theta_n} + \frac{1}{n} H(\hat{\theta_n})^{-1} \nabla</em>\theta \cdot l(z_i, \hat{\theta_n})<br>\end{aligned}<br>$$</p>
 <p>The above approx come from Taylor expansion!!</p>
 <p>Now we have a function $F$:<br>$$<br>F:\Theta \to R<br>$$</p>
 <p>$$<br>F(\hat{\theta}^{\neg i}) &#x3D; F(\hat{\theta}_n) + &lt;\nabla F(\hat{\theta}_n), \hat{\theta}^{\neg i}- \hat{\theta}_n&gt; + \text{higher order term}<br>$$</p>
@@ -380,7 +380,7 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2025/03/16/GenerativeModel/VAE/">Variational autoencoder</a>
+                <a class="prev" rel="prev" href="/2025/10/23/Love/love/"></a>
             
             
             <a class="next" rel="next" href="/2024/12/10/ML/ML14_continous_normalizing_flow/">ML14 Continous Normalizing Flow & ODE & PCA</a>

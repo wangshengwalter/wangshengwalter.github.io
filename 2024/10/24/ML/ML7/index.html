@@ -83,7 +83,7 @@
     
 
 
-<meta name="generator" content="Hexo 7.1.1"></head>
+<meta name="generator" content="Hexo 8.0.0"></head>
 
 <body>
     <script>
@@ -284,7 +284,7 @@
         </header>
 
         <div class="post-content">
-            <h1 id="ERM"><a href="#ERM" class="headerlink" title="ERM"></a>ERM</h1><p>Find $\hat{f}_{erm} \in F$, such that $\hat{f}_{erm} &#x3D; arg min_{f \in F} \frac{1}{n} \sum_n^{i&#x3D;1} l(f(x_i), y_i)$</p>
+            <h1 id="ERM"><a href="#ERM" class="headerlink" title="ERM"></a>ERM</h1><p>Find $\hat{f}<em>{erm} \in F$, such that $\hat{f}</em>{erm} &#x3D; arg min_{f \in F} \frac{1}{n} \sum_n^{i&#x3D;1} l(f(x_i), y_i)$</p>
 <h1 id="Stochastic-Gradient-methods"><a href="#Stochastic-Gradient-methods" class="headerlink" title="(Stochastic) Gradient methods"></a>(Stochastic) Gradient methods</h1><p>Assume parametric form for $F$. <br>$$F&#x3D; \{  f_\theta(x) | \theta \in \Theta\}$$<br>$$\Theta \in \mathbb{R}^p$$<br>$\Theta$ is a p dimensional vector and which going to parameterize the weights of our model. </p>
 <p>Here is some example: </p>
 <p>(linear classes) $f_\theta(x) &#x3D; &lt;\theta, x&gt;$ </p>
@@ -317,7 +317,7 @@
 <p>$$<br>\sum^{t-1}_{i&#x3D;0}|\nabla F(\theta_i)|^2 \leq \frac{2(F(\theta_0) - F(\theta_t))}{\eta}<br>$$</p>
 <p>due to $F \geq 0$ </p>
 <p>$$<br>\sum^{t-1}_{i&#x3D;0}|\nabla F(\theta_i)|^2 \leq \frac{2F(\theta_0)}{\eta}<br>$$ </p>
-<p>$$<br>\sum^{t-1}_{i&#x3D;0}|\nabla F(\theta_i)|^2 \geq t \cdot min_{i \in (0, …,t-1)} | \nabla F(\theta_i)|^2<br>$$</p>
+<p>$$<br>\sum^{t-1}<em>{i&#x3D;0}|\nabla F(\theta_i)|^2 \geq t \cdot min</em>{i \in (0, …,t-1)} | \nabla F(\theta_i)|^2<br>$$</p>
 <p>Then:</p>
 <p>$$<br>min_{i \in (0,…,T-1)}|\nabla F(\theta_i)|^2 \leq \frac{2F(\theta_0)}{\eta \cdot t}<br>$$</p>
 <h2 id="Stochastic-GD-SGD"><a href="#Stochastic-GD-SGD" class="headerlink" title="Stochastic GD(SGD)"></a>Stochastic GD(SGD)</h2><p>GD on ERM:<br>$$<br>\nabla_\theta \hat{L_n}[\theta] &#x3D; \frac{1}{\theta} \sum^n_{i&#x3D;1}[L(f_\theta(x_i), y_i)]<br>$$</p>

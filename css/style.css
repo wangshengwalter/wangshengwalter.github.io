@@ -828,7 +828,7 @@ header label {
   text-transform: uppercase;
   color: #fff;
   text-shadow: 4px 4px 6px #000;
-  font-size: 3em;
+  font-size: 8vw;
   z-index: 2;
 }
 .title_divi {
@@ -837,8 +837,9 @@ header label {
 }
 .skill_board {
   height: auto;
-  padding: 50px;
-  z-index: 100;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  z-index: 6;
   object-position: center;
   text-align: center;
   background-color: #fff;
@@ -846,36 +847,54 @@ header label {
 .dark-theme .skill_board {
   background-color: #292a2d;
 }
+.exp_title {
+  height: auto;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  z-index: 6;
+  object-position: center;
+  text-align: center;
+  background-color: #fff;
+}
+.dark-theme .exp_title {
+  background-color: #292a2d;
+}
 .about-container {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  z-index: 100;
+  display: flex;
+  width: 100vw;
+  min-height: 100vh;
+  position: relative;
   background-color: #fff;
 }
 .dark-theme .about-container {
   background-color: #292a2d;
 }
-.exp_title {
-  text-align: center;
-  object-position: center;
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
 #map {
-  position: absolute;
-  width: 50%;
+  position: relative;
+  flex: 0 0 55vw;
   height: 100vh;
+  z-index: 1;
 }
 #features {
-  width: 50%;
+  flex: 1;
+  position: absolute;
+  width: 60vw;
   height: 100vh;
-  margin-left: 50%;
+  top: 0;
+  right: 0;
+  z-index: 2;
   font-family: sans-serif;
   overflow-y: scroll;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, #fff 15%, #fff 100%);
+}
+.dark-theme #features {
+  background: linear-gradient(to right, rgba(41,42,45,0) 0%, #292a2d 15%, #292a2d 100%);
 }
 #features section {
-  padding: 25px 50px;
+  padding-top: 20px;
+  padding-right: 30px;
+  padding-bottom: 20px;
+  padding-left: 10vw;
   line-height: 25px;
   border-bottom: 1px solid #ddd;
   opacity: 0.25;
@@ -886,11 +905,42 @@ header label {
 }
 #features section:last-child {
   border-bottom: none;
-  margin-bottom: 200px;
+  margin-bottom: 50vh;
+}
+@media (max-width: 900px) {
+  .about-container {
+    flex-direction: column;
+    height: 100vh;
+  }
+  #map {
+    flex: none;
+    width: 100vw;
+    height: 50vh;
+    position: relative;
+  }
+  #features {
+    position: relative;
+    width: 100vw;
+    height: 50vh;
+    top: auto;
+    right: auto;
+    overflow-y: scroll;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #fff 15%, #fff 100%);
+  }
+  .dark-theme #features {
+    background: linear-gradient(to bottom, rgba(41,42,45,0) 0%, #292a2d 15%, #292a2d 100%);
+  }
+  #features section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  #features section:last-child {
+    border-bottom: none;
+    margin-bottom: 20vh;
+  }
 }
 .contactinfo {
   text-align: center;
-  object-position: center;
   margin-top: 50px;
   margin-bottom: 50px;
 }

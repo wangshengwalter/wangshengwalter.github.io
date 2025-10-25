@@ -83,7 +83,7 @@
     
 
 
-<meta name="generator" content="Hexo 7.1.1"></head>
+<meta name="generator" content="Hexo 8.0.0"></head>
 
 <body>
     <script>
@@ -312,7 +312,7 @@
 <p>$$<br>r_{\theta_t}(j:X_i) &#x3D; prob_{\theta_t}(X_i \text{ was sampled from the } j^{th} \text{ coin})<br>$$</p>
 <h4 id="Example-apply-Em-to-Gaussion-mixture-model"><a href="#Example-apply-Em-to-Gaussion-mixture-model" class="headerlink" title="Example: apply Em to Gaussion mixture model"></a>Example: apply Em to Gaussion mixture model</h4><p>$Z \sim Cat(\pi_1,…,\pi_k)$<br>$X|(Z&#x3D;i) \sim N(\mu_i, \Sigma_i)$<br>$[X \in \mathbb{R}^d, Z \in {1,…,k}]$</p>
 <p><strong>E-step</strong></p>
-<p>We want computer $P_{\theta_t}(Z|X)$:<br>Here is parameters we take care:<br>$$\theta_t &#x3D; ( \{\mu_i, \Sigma_i\}_{i&#x3D;1}^k,  \{\ pi_i \}_{i&#x3D;1}^k )$$</p>
+<p>We want computer $P_{\theta_t}(Z|X)$:<br>Here is parameters we take care:<br>$$\theta_t &#x3D; ( \{\mu_i, \Sigma_i\}<em>{i&#x3D;1}^k,  \{\ pi_i \}</em>{i&#x3D;1}^k )$$</p>
 <p>Let define following:<br>$$<br>\phi(X;\mu, \Sigma) &#x3D; \frac{1}{\sqrt{(2\pi)^d det\Sigma}}exp(-\frac{1}{2}|X-\mu|_{\Sigma^{-1}}^2)<br>$$</p>
 <blockquote>
 <p>Remember<br>$X^T\Sigma^{-1} X &#x3D; |X|_{\Sigma^{-1}}^2$</p>

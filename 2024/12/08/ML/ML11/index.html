@@ -83,7 +83,7 @@
     
 
 
-<meta name="generator" content="Hexo 7.1.1"></head>
+<meta name="generator" content="Hexo 8.0.0"></head>
 
 <body>
     <script>
@@ -303,7 +303,7 @@
 <p>$$<br>\begin{aligned}<br>\underset{\theta}{max} \underset{P(X)}{\mathbb{E}} log P_\theta(X) &amp;\geq \underset{\theta , q(z|x)}{max} \underset{P(X)}{\mathbb{E}} \left[ \underset{q(z|x)}{\mathbb{E}} log P_\theta(x|z) - KL(q(z|x)||P_\theta(z)) \right] \\<br>&amp; \geq \underset{\theta , \phi}{max} \underset{P(X)}{\mathbb{E}} \left[ \underset{q_\phi(z|x)}{\mathbb{E}} log P_\theta(x|z) - KL(q_\phi(z|x)||P_\theta(z)) \right]<br>\end{aligned}<br>$$</p>
 <p>It’s hard to calculate $KL(q_\phi(z|x)||P_\theta(z))$<br>Let’s consider an Gaussion posteriors priors:<br>$$<br>q_\phi(z|x) &#x3D; N(e_{\mu,\phi}(x), e_{\Sigma,\phi}(x))<br>$$<br>$$<br>P_\theta(z) &#x3D; N(\mu_p, \Sigma_p)<br>$$</p>
 <p>Given $q_\phi(z|x)$ &amp; $P_\theta(z)$ as abive.<br>The $KL(q_\phi(z|x)||P_\theta(z))$ has a closed form!!</p>
-<p>$$<br>KL(q_\phi(z|x)||P_\theta(z)) &#x3D; \frac{1}{2} \left[ tr(\Sigma_p^{-1} \cdot e_{\Sigma, \phi}(x)) + |\mu_p - e_{\mu,\phi}(x)|_{\Sigma_p^-1}^2 -l + log [\frac{det \Sigma p}{det e_{\Sigma,\phi}(x)}] \right]<br>$$</p>
+<p>$$<br>KL(q_\phi(z|x)||P_\theta(z)) &#x3D; \frac{1}{2} \left[ tr(\Sigma_p^{-1} \cdot e_{\Sigma, \phi}(x)) + |\mu_p - e_{\mu,\phi}(x)|<em>{\Sigma_p^-1}^2 -l + log [\frac{det \Sigma p}{det e</em>{\Sigma,\phi}(x)}] \right]<br>$$</p>
 <ul>
 <li>$l$ is dimension of the latent $z$</li>
 </ul>
@@ -313,7 +313,7 @@
 <p>But, the gradient:<br>$\nabla_\phi \hat{F}_n(\phi) &#x3D; 0$<br>due to in any auto-diff package???<br>The gradient is 0 is not learnable, thus, we need to use <strong>Reparameterization Trick</strong>!! </p>
 <p>Let’s assume that $q_\phi(z) &#x3D; N(\mu_\phi, \Sigma_\phi)$<br>$$<br>Z &#x3D;;(equal , dist); \left[ \mu_\phi+ \Sigma_\phi^{1&#x2F;2} \cdot g \right] \quad Z \sim q_\phi(z), , g \sim N(0,I)<br>$$<br>Then the equation change!!<br>$$<br>F(\phi) &#x3D; \underset{q_\phi(z)}{\mathbb{E}} [f(z)]&#x3D;\underset{g \sim N(0,I)}{\mathbb{E}} \left[ f(\mu_\phi+ \Sigma_\phi^{1&#x2F;2} \cdot g) \right]<br>$$</p>
 <p>$$<br>\hat{F_n}(\phi) &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^n [f(\mu_\phi+ \Sigma_\phi^{1&#x2F;2} \cdot g)] \quad, \quad g_i \sim N(0,I)<br>$$</p>
-<p>Then:<br>$$\mathbb{E}[\hat{F}_n(\phi)] &#x3D; F(\phi)$$<br>$$\mathbb{E}[\nabla_\phi \hat{F}_n(\phi)] &#x3D; \nabla_\phi F(\phi)$$</p>
+<p>Then:<br>$$\mathbb{E}[\hat{F}<em>n(\phi)] &#x3D; F(\phi)$$<br>$$\mathbb{E}[\nabla</em>\phi \hat{F}<em>n(\phi)] &#x3D; \nabla</em>\phi F(\phi)$$</p>
 <h2 id="Finite-Sample-VI-objective"><a href="#Finite-Sample-VI-objective" class="headerlink" title="Finite Sample VI objective"></a>Finite Sample VI objective</h2><p>Given $x_1, x_2,…,x_n$ and want to learn $\theta$.<br>Draw $g_1,…,g_n \sim N(0,I)$<br>$$<br>\underset{\theta , \phi}{max} \hat{L}n(\theta, \phi) &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^n \left[ logP_\theta(x_i|z&#x3D;e_{\mu,\phi}(x_i)+e_{\Sigma,\phi}^{1&#x2F;2}(x_i) \cdot g_i) -KL(g_\phi(z|x_i) || P_\theta(z))\right]<br>$$</p>
 <p>For avove equation, we can run gradient ascent method on $\hat{L}n(\theta, \phi)$</p>
 <p>Go back to see the whole process:<br>$$<br>data \underset{encode}{\to} Latent , space \underset{decode}{\to} new , data<br>$$</p>
